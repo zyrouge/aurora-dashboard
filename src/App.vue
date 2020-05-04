@@ -49,7 +49,7 @@ export default {
   --notsogrey: #2c2f33;
   --grey: #99aab5;
   --notsowhite: #f1f1f2;
-  --void: #0e0b16;
+  --void: #161124;
   --fuschia: #a239ca;
   --jewel: #4717f6;
   --stark: #e7dfdd;
@@ -158,7 +158,7 @@ main {
   left: 20px;
   bottom: 20px;
   width: calc(100vw - 40px);
-  background: rgb(30, 24, 48);
+  background: rgb(56, 45, 88);
   padding: 5px 15px;
   border-radius: 5px;
   text-align: left;

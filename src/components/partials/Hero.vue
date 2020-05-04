@@ -5,6 +5,13 @@
       <h3>Take your server to a Whole-New Level!</h3>
       <a href="/invite"><i class="fas fa-plus"></i> Add to your Server!</a>
     </div>
+    <div class="mobile">
+      <img src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png" />
+      <h1>Aurora</h1>
+      <h3>Take your server to a Whole-New Level!</h3>
+      <br />
+      <a href="/invite"><i class="fas fa-plus"></i> Add to your Server!</a>
+    </div>
   </div>
 </template>
 
@@ -41,6 +48,10 @@ export default {
 <style scoped>
 body {
   margin: 0;
+}
+
+.mobile {
+  display: none;
 }
 
 #parallax {
@@ -105,18 +116,54 @@ body {
   top: 67%;
 }
 
-@media screen and (max-width: 800px) {
-  #parallax h3 {
-    font-size: 15px;
-    position: relative;
+.mobile {
+  text-shadow: 0 0 15px var(--jewel);
+  padding: 10px;
+  width: 100%;
+  background: transparent;
+}
+
+.mobile img {
+  width: 200px;
+  box-shadow: 0 0 10px var(--jewel);
+  border-radius: 50%;
+  transform: translateY(-10px);
+  animation: floatAnime 5s infinite;
+}
+
+.mobile a {
+  background: linear-gradient(90deg, var(--fuschia), var(--jewel));
+  padding: 10px 20px;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.mobile a:hover {
+  box-shadow: 0 0 10px var(--jewel);
+}
+
+@media screen and (max-width: 750px) {
+  #parallax {
+    display: none;
   }
 
-  #parallax a {
-    top: 73%;
+  .mobile {
+    display: block;
   }
+}
 
-  #parallax a:hover {
-    top: 72%;
+@keyframes floatAnime {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(-20px);
   }
 }
 </style>
