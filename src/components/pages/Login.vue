@@ -10,12 +10,13 @@
 </template>
 
 <script>
+import { discord } from "../../config";
+
 export default {
   name: "login",
   data() {
     return {
-      url:
-        "https://discordapp.com/api/oauth2/authorize?client_id=701036929298333726&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fcallback&response_type=code&scope=identify%20guilds",
+      url: `${discord.oauth}`,
       error: ""
     };
   }

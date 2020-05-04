@@ -1,6 +1,11 @@
 <template>
   <h4 class="Callback">
     <div>
+      <div class="loading" v-if="status != 'loaded'">
+        <span>•</span>
+        <span>•</span>
+        <span>•</span>
+      </div>
       <h1>Logging in...</h1>
       <h5>This should not take more time!</h5>
     </div>
@@ -11,21 +16,24 @@
 export default {
   data() {
     return {
-      code: ""
+      code: "",
     };
   },
   methods: {
     login: function() {
       let code = this.$route.query.code;
+      let guildID = this.$route.query.guild_id;
+      let direct = "/";
+      if (guildID) direct += `servers/${guildID}`;
       this.$store
         .dispatch("login", { code })
-        .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
-    }
+        .then(() => this.$router.push(direct))
+        .catch((err) => console.log(err));
+    },
   },
   mounted() {
     this.login();
-  }
+  },
 };
 </script>
 

@@ -1,7 +1,11 @@
 <template>
   <div class="cointainer">
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <h1 class="status" v-if="status != 'loaded'">{{ status }}</h1>
+    <div class="loading" v-if="status != 'loaded'">
+      <span>•</span>
+      <span>•</span>
+      <span>•</span>
+    </div>
     <div class="guilds">
       <ul>
         <li v-for="(guild, index) in guilds" :key="index">
@@ -24,17 +28,17 @@ export default {
       error: "",
       defaultImage:
         "https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512",
-      status: "Loading..."
+      status: "Loading...",
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me/guilds`)
-      .then(res => {
+      .then((res) => {
         res.data
-          .filter(guild => (guild.permissions & 2146958591) === 2146958591)
-          .forEach(guild => {
+          .filter((guild) => (guild.permissions & 2146958591) === 2146958591)
+          .forEach((guild) => {
             if (guild.icon !== null)
               guild.iconURL = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=1280`;
             else guild.iconURL = `${that.defaultImage}`;
@@ -42,7 +46,7 @@ export default {
           });
         that.loaded();
       })
-      .catch(e => {
+      .catch((e) => {
         that.error = e;
       });
   },
@@ -55,12 +59,16 @@ export default {
     },
     gotoGuild(id) {
       this.$router.push(`/servers/${id}`);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.container .guilds {
+  cursor: pointer;
+}
+
 .container .guilds ul li {
   display: inline-block;
   list-style: none;
@@ -86,8 +94,13 @@ export default {
 
 .container .guilds li .guild img {
   width: 50%;
-  border-radius: 5px;
+  border-radius: 50%;
   margin-bottom: 5px;
+  transition: 0.5s;
+}
+
+.container .guilds li .guild:hover img {
+  border-radius: 20px;
 }
 
 p.error {

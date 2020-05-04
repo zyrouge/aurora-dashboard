@@ -1,7 +1,11 @@
 <template>
   <div class="cointainer">
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <h1 class="status" v-if="status != 'loaded'">{{ status }}</h1>
+    <div class="loading" v-if="status != 'loaded'">
+      <span>•</span>
+      <span>•</span>
+      <span>•</span>
+    </div>
     <div class="me" v-if="status == 'loaded'">
       <div class="avatar">
         <img v-bind:src="user.avatarURL" v-bind:alt="user.username" />
@@ -15,29 +19,44 @@
 </template>
 
 <script>
+import JQuery from "jquery";
+const $ = JQuery;
+
 export default {
   name: "me",
   data() {
     return {
       user: {},
       error: "",
-      status: "Loading..."
+      status: "Loading...",
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me`)
-      .then(res => {
-        res.data.avatarURL = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.png?size=1280`;
+      .then((res) => {
+        let avatar = `https://cdn.discordapp.com/embed/avatars/${Math.floor(
+          Math.random() * 4
+        )}.png`;
+        if (res.data.avatar) {
+          avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.gif?size=1280`;
+          $.get(avatar)
+            .done(() => {})
+            .fail(
+              () =>
+                (avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.png?size=1280`)
+            );
+        }
+        res.data.avatarURL = avatar;
         that.status = "loaded";
         that.user = res.data;
       })
-      .catch(e => {
+      .catch((e) => {
         that.error = e;
       });
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

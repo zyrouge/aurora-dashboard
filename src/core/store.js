@@ -3,9 +3,10 @@ import Vuex from "vuex";
 import axios from "axios";
 import qs from "querystring";
 
-const CLIENT_ID = "701036929298333726";
-const CLIENT_SECRET = "V0X_QdlwxPRnUlRIBPsg67efQNc6TzmK";
-const REDIRECT = "http://localhost:8080/callback";
+const config = require("../config");
+const CLIENT_ID = config.discord.id;
+const CLIENT_SECRET = config.discord.secret;
+const REDIRECT = config.discord.redirect;
 
 Vue.use(Vuex);
 

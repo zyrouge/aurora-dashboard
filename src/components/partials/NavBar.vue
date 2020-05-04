@@ -1,29 +1,81 @@
 <template>
-  <div class="navbar">
-    <img v-bind:src="botIcon" />
-    <ul>
-      <li>
-        <router-link to="/">Home</router-link>
-      </li>
-      <li>
-        <router-link to="/servers">Servers</router-link>
-      </li>
-      <li>
-        <a href="https://status.auroradiscordbot.ga/">Status</a>
-      </li>
-      <li>
-        <router-link to="/me">Me</router-link>
-      </li>
-      <li>
-        <span v-if="isLoggedIn">
-          <a @click="logout">Logout</a>
-        </span>
-      </li>
-    </ul>
-  </div>
+  <nav>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <div class="mobnav">
+      <router-link class="logo" to="/" style="padding: 0 10px;">
+        <img src="../../assets/aurora.png" height="40px" />
+      </router-link>
+      <span class="burger">
+        <i class="fa fa-bars" @click="updateNav"></i>
+      </span>
+    </div>
+    <div class="left" id="left">
+      <router-link to="/features">
+        <i class="far fa-check-circle"></i> Features
+      </router-link>
+      <router-link to="/commands">
+        <i class="fas fa-list"></i> Commands
+      </router-link>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <i class="fa fa-caret-down"></i> Help
+        </button>
+        <div class="dropdown-box" style="transform: translateX(245px)">
+          <div class="dropdown-content">
+            <a v-bind:href="supportServer">
+              <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://status.auroradiscordbot.ga/">
+              <i class="fas fa-layer-group"></i> Status
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <i class="fa fa-caret-down"></i> Tools
+        </button>
+        <div class="dropdown-box" style="transform: translateX(310px)">
+          <div class="dropdown-content">
+            <a v-bind:href="supportServer">
+              <i class="fab fa-discord"></i> Discord
+            </a>
+            <a href="https://status.auroradiscordbot.ga/">
+              <i class="fas fa-layer-group"></i> Status
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right" id="right">
+      <a v-bind:href="inviteLink">
+        Invite
+        <i class="fas fa-plus"></i>
+      </a>
+      <router-link to="/servers">
+        Servers
+        <i class="far fa-clipboard"></i>
+      </router-link>
+      <router-link to="/me">
+        Me
+        <i class="far fa-user-circle"></i>
+      </router-link>
+      <a style="cursor: pointer;" v-if="isLoggedIn" @click="logout">
+        Logout
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    </div>
+  </nav>
 </template>
 
 <script>
+import config from "../../config";
+import JQuery from "jquery";
+const $ = JQuery;
+
 export default {
   name: "NavBar",
   props: {},
@@ -34,7 +86,8 @@ export default {
   },
   data() {
     return {
-      botIcon: `https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512`
+      supportServer: config.discord.support,
+      inviteLink: config.discord.invite
     };
   },
   methods: {
@@ -42,6 +95,10 @@ export default {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/");
       });
+    },
+    updateNav() {
+      $(".left").toggle("fast");
+      $(".right").toggle("fast");
     }
   }
 };
@@ -53,53 +110,198 @@ export default {
   padding: 0;
 }
 
-.navbar {
-  padding: 5px 20px;
-  display: inline-block;
-  width: 100%;
-  background: linear-gradient(145deg, var(--jewel), var(--fuschia));
-  transition: 0.5s;
+@media screen and (max-width: 750px) {
+  .mobnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(
+      to left,
+      rgba(162, 57, 202, 0.2),
+      rgba(71, 23, 246, 0.2)
+    );
+  }
+
+  .mobnav .burger {
+    margin-left: auto;
+  }
+
+  img {
+    border-radius: 5px;
+  }
+
+  span.burger {
+    cursor: pointer;
+    padding-right: 15px;
+  }
+
+  .left router-link,
+  .left a,
+  .right router-link,
+  .right a {
+    display: block;
+    background: linear-gradient(
+      to left,
+      rgba(162, 57, 202, 0.2),
+      rgba(71, 23, 246, 0.2)
+    );
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: 0.5s;
+    padding: 5px;
+  }
+
+  .left router-link:hover,
+  .left a:hover,
+  .right router-link:hover,
+  .right a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .left a.router-link-active,
+  .left a.router-link-exact-active,
+  .right a.router-link-active,
+  .right a.router-link-exact-active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .left,
+  .right {
+    display: none;
+  }
+
+  .dropdown button {
+    display: none;
+  }
 }
 
-img {
-  height: 40px;
-  border-radius: 50%;
-  transition: 0.5s;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+@media screen and (min-width: 750px) {
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(
+      to left,
+      rgba(115, 79, 129, 0.2),
+      rgba(71, 23, 246, 0.2)
+    );
+    overflow: hidden;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  img {
+    margin: 0;
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .left,
+  .right {
+    display: block;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    margin-left: auto;
+    float: right;
+  }
+
+  .left router-link,
+  .left a,
+  .right router-link,
+  .right a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: 0.5s;
+    padding: 5px 10px;
+  }
+
+  .left router-link:hover,
+  .left a:hover,
+  .right router-link:hover,
+  .right a:hover {
+    color: rgb(255, 255, 255);
+  }
+
+  .left a.router-link-active,
+  .left a.router-link-exact-active,
+  .right a.router-link-active,
+  .right a.router-link-exact-active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 5px;
+  }
+
+  .dropdown {
+    display: inline;
+  }
+
+  .dropdown button {
+    background: transparent;
+    border: transparent;
+    font-family: "Poppins";
+    color: rgba(255, 255, 255, 0.8);
+    transition: 0.5s;
+    font-size: 16px;
+    outline: none;
+    padding-right: 15px;
+  }
+
+  .dropdown button:hover {
+    color: white;
+  }
+
+  .dropdown-box {
+    position: absolute;
+    background: transparent;
+    padding-top: 10px;
+  }
+
+  .dropdown-content {
+    background: rgb(110, 54, 133);
+  }
+
+  .dropdown-content a {
+    display: block;
+  }
+
+  .dropdown .dropdown-content {
+    border-radius: 5px;
+    padding: 5px 10px;
+    overflow: hidden;
+    display: none;
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-box:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content:hover {
+    display: block;
+  }
 }
 
-img:hover {
-  border: 2px solid var(--stark);
-  box-shadow: 2px 2px 1px var(--fuschia);
-  border-radius: 13px;
-}
-
-ul {
-  padding-top: 12px;
-  list-style-type: none;
-  float: right;
-}
-
-li {
-  display: inline-block;
-  padding: 0 4px;
-}
-
-a {
-  box-sizing: border-box;
-  padding: 5px 10px;
-  text-decoration: none;
-  color: var(--stark);
-  border-radius: 4px;
-  transition: 0.5s;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-a:hover {
-  text-decoration: none;
-  color: var(--fuschia);
-  background: var(--stark);
-  border-radius: 4px;
-  box-shadow: 2px 2px 1px var(--jewel);
+@keyframes dropdownAnime {
+  0% {
+    transform: translateY(-500px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 </style>
