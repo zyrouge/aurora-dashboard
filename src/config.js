@@ -5,7 +5,7 @@ const baseURL =
   staging == "production"
     ? "https://auroradiscordbot.ga"
     : "http://localhost:8080";
-const logo = require("./assets/aurora.png");
+const cdn = "https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/";
 
 /* Discord */
 const id = "702808552892530829";
@@ -26,7 +26,7 @@ const oauth =
 
 module.exports = {
   baseURL,
-  logo,
+  cdn,
   discord: {
     id,
     secret,

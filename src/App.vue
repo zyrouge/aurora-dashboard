@@ -12,16 +12,21 @@
         </div>
       </center>
     </main>
+    <footer>
+      <Footer />
+    </footer>
   </div>
 </template>
 
 <script>
-import NavBar from "./components/partials/NavBar.vue";
+import NavBar from "./components/partials/NavBar";
+import Footer from "./components/partials/Footer";
 
 export default {
   name: "App",
   components: {
     NavBar,
+    Footer,
   },
   created() {
     this.$http.interceptors.response.use(undefined, function(err) {
@@ -79,6 +84,15 @@ main {
   transition: 0.5s;
 }
 
+@media screen and (max-width: 750px) {
+  main {
+    background: none;
+  }
+
+  .container {
+    padding: 20px 0 0 0;
+  }
+}
 .fade-enter-active {
   animation: fade-animation 0.5s;
 }

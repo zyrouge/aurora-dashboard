@@ -6,7 +6,10 @@
     />
     <div class="mobnav">
       <router-link class="logo" to="/" style="padding: 0 10px;">
-        <img src="../../assets/aurora.png" height="40px" />
+        <img
+          src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png"
+          height="40px"
+        />
       </router-link>
       <span class="burger">
         <i class="fa fa-bars" @click="updateNav"></i>
@@ -20,30 +23,26 @@
         <i class="fas fa-list"></i> Commands
       </router-link>
       <div class="dropdown">
-        <button class="dropbtn">
-          <i class="fa fa-caret-down"></i> Help
-        </button>
-        <div class="dropdown-box" style="transform: translateX(245px)">
+        <button class="dropbtn"><i class="fa fa-caret-down"></i> Help</button>
+        <div class="dropdown-box help">
           <div class="dropdown-content">
-            <a v-bind:href="supportServer">
+            <a v-bind:href="supportServer" target="_blank">
               <i class="fab fa-discord"></i> Discord
             </a>
-            <a href="https://status.auroradiscordbot.ga/">
+            <a href="https://status.auroradiscordbot.ga/" target="_blank">
               <i class="fas fa-layer-group"></i> Status
             </a>
           </div>
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn">
-          <i class="fa fa-caret-down"></i> Tools
-        </button>
-        <div class="dropdown-box" style="transform: translateX(310px)">
+        <button class="dropbtn"><i class="fa fa-caret-down"></i> Tools</button>
+        <div class="dropdown-box tools">
           <div class="dropdown-content">
-            <a v-bind:href="supportServer">
+            <a v-bind:href="supportServer" target="_blank">
               <i class="fab fa-discord"></i> Discord
             </a>
-            <a href="https://status.auroradiscordbot.ga/">
+            <a href="https://status.auroradiscordbot.ga/" target="_blank">
               <i class="fas fa-layer-group"></i> Status
             </a>
           </div>
@@ -51,7 +50,7 @@
       </div>
     </div>
     <div class="right" id="right">
-      <a v-bind:href="inviteLink">
+      <a v-bind:href="inviteLink" target="_blank">
         Invite
         <i class="fas fa-plus"></i>
       </a>
@@ -82,12 +81,12 @@ export default {
   computed: {
     isLoggedIn: function() {
       return this.$store.getters.isLoggedIn;
-    }
+    },
   },
   data() {
     return {
       supportServer: config.discord.support,
-      inviteLink: config.discord.invite
+      inviteLink: config.discord.invite,
     };
   },
   methods: {
@@ -99,8 +98,8 @@ export default {
     updateNav() {
       $(".left").toggle("fast");
       $(".right").toggle("fast");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -254,7 +253,7 @@ export default {
     transition: 0.5s;
     font-size: 16px;
     outline: none;
-    padding-right: 15px;
+    padding: 5px 10px;
   }
 
   .dropdown button:hover {
@@ -287,21 +286,20 @@ export default {
     display: block;
   }
 
+  .dropdown-box.help {
+    transform: translateX(255px);
+  }
+
+  .dropdown-box.tools {
+    transform: translateX(330px);
+  }
+
   .dropdown-box:hover .dropdown-content {
     display: block;
   }
 
   .dropdown-content:hover {
     display: block;
-  }
-}
-
-@keyframes dropdownAnime {
-  0% {
-    transform: translateY(-500px);
-  }
-  100% {
-    transform: translateY(0px);
   }
 }
 </style>
