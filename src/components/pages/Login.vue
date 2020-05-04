@@ -18,6 +18,9 @@ import { discord } from "../../config";
 
 export default {
   name: "login",
+  metaInfo: {
+    title: "Login",
+  },
   data() {
     return {
       url: `${discord.oauth}`,

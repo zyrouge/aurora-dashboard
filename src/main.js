@@ -4,6 +4,11 @@ import router from "./core/router";
 import store from "./core/store";
 import Axios from "axios";
 import VueDiscordMessage from "vue-discord-message";
+import VueMeta from "vue-meta";
+
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true,
+});
 Vue.use(VueDiscordMessage);
 
 Vue.prototype.$http = Axios;

@@ -24,6 +24,23 @@ import Footer from "./components/partials/Footer";
 
 export default {
   name: "App",
+  metaInfo: {
+    title: "Aurora Discord Bot",
+    titleTemplate: "%s - Aurora",
+    meta: [
+      {
+        name: "description",
+        content: "Take your server to a Whole-New Level!",
+        vmid: "test",
+      },
+      {
+        property: "og:title",
+        content: "Aurora Discord Bot",
+        template: (chunk) => `${chunk} - Aurora`,
+        vmid: "og:title",
+      },
+    ],
+  },
   components: {
     NavBar,
     Footer,

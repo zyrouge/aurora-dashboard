@@ -14,6 +14,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Callback",
+  },
   data() {
     return {
       code: "",

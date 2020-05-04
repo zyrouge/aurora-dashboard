@@ -54,7 +54,10 @@
 
 <script>
 export default {
-  name: "me",
+  name: "Guild",
+  metaInfo: {
+    title: "Dashboard",
+  },
   data() {
     return {
       guild: {},

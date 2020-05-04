@@ -21,7 +21,10 @@
 
 <script>
 export default {
-  name: "me",
+  name: "Servers",
+  metaInfo: {
+    title: "Dashboard",
+  },
   data() {
     return {
       guilds: [],

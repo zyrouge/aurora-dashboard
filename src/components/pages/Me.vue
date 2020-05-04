@@ -24,18 +24,21 @@ const $ = JQuery;
 
 export default {
   name: "me",
+  metaInfo: {
+    title: "Profile"
+  },
   data() {
     return {
       user: {},
       error: "",
-      status: "Loading...",
+      status: "Loading..."
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me`)
-      .then((res) => {
+      .then(res => {
         let avatar = `https://cdn.discordapp.com/embed/avatars/${Math.floor(
           Math.random() * 4
         )}.png`;
@@ -52,11 +55,11 @@ export default {
         that.status = "loaded";
         that.user = res.data;
       })
-      .catch((e) => {
+      .catch(e => {
         that.error = e;
       });
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

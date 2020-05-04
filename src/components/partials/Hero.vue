@@ -18,6 +18,9 @@
 <script>
 export default {
   name: "Hero",
+  metaInfo: {
+    title: "Home",
+  },
   components: {},
   mounted() {
     this.start();
