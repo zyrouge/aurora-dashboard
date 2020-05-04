@@ -13,7 +13,7 @@ import Hero from "../partials/Hero";
 export default {
   components: {
     // Multiselect,
-    Hero
+    Hero,
   },
   data() {
     return {
@@ -24,13 +24,15 @@ export default {
           { name: "Owner", id: "1242432131", $isDisabled: true },
           { name: "Mod", id: "124243213132", $isDisabled: false },
           { name: "Admin", id: "1242432131424", $isDisabled: false },
-          { name: "Member", id: "12424321314244", $isDisabled: false }
-        ]
-      }
+          { name: "Member", id: "12424321314244", $isDisabled: false },
+        ],
+      },
     };
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    console.log(process.env.SECRET);
+  },
+  methods: {},
 };
 </script>
 

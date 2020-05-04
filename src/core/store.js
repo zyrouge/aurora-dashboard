@@ -56,8 +56,7 @@ export default new Vuex.Store({
             }),
             {
               headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization: `${this.state.type} ${this.state.token}`,
+                "Content-type": "application/x-www-form-urlencoded",
               },
             }
           )
