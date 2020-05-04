@@ -3,8 +3,8 @@ const staging = process.env.NODE_ENV;
 /* Main */
 const baseURL =
   staging == "production"
-    ? "http://localhost:8080"
-    : "https://auroradiscordbot.ga";
+    ? "https://auroradiscordbot.ga"
+    : "http://localhost:8080";
 const logo = require("./assets/aurora.png");
 
 /* Discord */

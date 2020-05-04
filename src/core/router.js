@@ -41,11 +41,17 @@ const router = new Router({
       name: "servers",
       path: "/servers",
       component: Servers,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       name: "guild",
       path: "/servers/:id",
       component: Guild,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       name: "notfound",
