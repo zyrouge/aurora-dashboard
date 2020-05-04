@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    console.log(process.env.SECRET);
+    console.log(process.env);
   },
   methods: {},
 };
