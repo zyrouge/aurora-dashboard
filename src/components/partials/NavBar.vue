@@ -58,11 +58,20 @@
         Servers
         <i class="far fa-clipboard"></i>
       </router-link>
-      <router-link to="/me">
+      <a href="/login" v-if="!isLoggedIn">
+        Login
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+      <router-link to="/me" v-if="isLoggedIn">
         Me
         <i class="far fa-user-circle"></i>
       </router-link>
-      <a style="cursor: pointer;" v-if="isLoggedIn" @click="logout">
+      <a
+        href="javascript:void(0)"
+        style="cursor: pointer;"
+        v-if="isLoggedIn"
+        @click="logout"
+      >
         Logout
         <i class="fas fa-sign-out-alt"></i>
       </a>

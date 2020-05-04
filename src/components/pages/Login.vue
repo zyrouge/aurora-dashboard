@@ -1,10 +1,14 @@
 <template>
   <h4 class="Login">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
     <div>
       <h1>Login</h1>
       <br />
-      <a v-bind:href="url">Discord</a>
+      <a v-bind:href="url"><i class="fab fa-discord"></i> Discord</a>
     </div>
   </h4>
 </template>
@@ -17,9 +21,9 @@ export default {
   data() {
     return {
       url: `${discord.oauth}`,
-      error: ""
+      error: "",
     };
-  }
+  },
 };
 </script>
 
@@ -31,6 +35,7 @@ export default {
   font-size: 20px;
   border-radius: 4px;
   transition: 0.5s;
+  text-decoration: none;
 }
 
 .Login div a:hover {
