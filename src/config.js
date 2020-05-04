@@ -9,8 +9,7 @@ const logo = require("./assets/aurora.png");
 
 /* Discord */
 const id = "702808552892530829";
-const secret =
-  staging == "production" ? process.env.SECRET : process.env.VUE_APP_SECRET;
+const secret = staging == process.env.VUE_APP_SECRET;
 const redirect =
   staging == "production"
     ? "https://auroradiscordbot.ga/callback"
