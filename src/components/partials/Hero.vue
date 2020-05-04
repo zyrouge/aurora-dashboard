@@ -110,5 +110,13 @@ body {
     font-size: 15px;
     position: relative;
   }
+
+  #parallax a {
+    top: 73%;
+  }
+
+  #parallax a:hover {
+    top: 72%;
+  }
 }
 </style>

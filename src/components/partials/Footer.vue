@@ -132,4 +132,19 @@ router-link:hover {
   transform: translateY(-5%);
   box-shadow: 0 0 5px var(--jewel);
 }
+
+@media screen and (max-width: 1000px) {
+  .footer-content {
+    display: block;
+  }
+
+  .footer-content .botinfo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer-content div:not(.botinfo) {
+    display: none;
+  }
+}
 </style>
