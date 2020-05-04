@@ -11,7 +11,10 @@ const logo = require("./assets/aurora.png");
 const id = "702808552892530829";
 const secret =
   staging == "production" ? process.env.SECRET : process.env.VUE_APP_SECRET;
-const redirect = `${baseURL}/callback`;
+const redirect =
+  staging == "production"
+    ? "https://auroradiscordbot.ga/callback"
+    : "http://localhost:8080/callback";
 const support = "https://discordapp.com/invite/8KV5zCg";
 const invite =
   staging == "production"
