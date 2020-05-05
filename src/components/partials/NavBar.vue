@@ -6,10 +6,7 @@
     />
     <div class="mobnav">
       <router-link class="logo" to="/" style="padding: 0 10px;">
-        <img
-          src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png"
-          height="40px"
-        />
+        <img src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png" height="40px" />
       </router-link>
       <span class="burger">
         <i class="fa fa-bars" @click="updateNav"></i>
@@ -23,7 +20,9 @@
         <i class="fas fa-list"></i> Commands
       </router-link>
       <div class="dropdown">
-        <button class="dropbtn"><i class="fa fa-caret-down"></i> Help</button>
+        <button class="dropbtn">
+          <i class="fa fa-caret-down"></i> Help
+        </button>
         <div class="dropdown-box help">
           <div class="dropdown-content">
             <a v-bind:href="supportServer" target="_blank">
@@ -36,44 +35,33 @@
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn"><i class="fa fa-caret-down"></i> Tools</button>
+        <button class="dropbtn">
+          <i class="fa fa-caret-down"></i> Tools
+        </button>
         <div class="dropdown-box tools">
           <div class="dropdown-content">
-            <a v-bind:href="supportServer" target="_blank">
-              <i class="fab fa-discord"></i> Discord
-            </a>
-            <a href="https://status.auroradiscordbot.ga/" target="_blank">
-              <i class="fas fa-layer-group"></i> Status
-            </a>
+            <router-link to="/credits">
+              <i class="fas fa-angle-double-right"></i> Credits
+            </router-link>
           </div>
         </div>
       </div>
     </div>
     <div class="right" id="right">
       <a v-bind:href="inviteLink" target="_blank">
-        Invite
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus"></i> Invite
       </a>
       <router-link to="/servers">
-        Servers
-        <i class="far fa-clipboard"></i>
+        <i class="far fa-clipboard"></i> Servers
       </router-link>
       <a href="/login" v-if="!isLoggedIn">
-        Login
-        <i class="fas fa-sign-out-alt"></i>
+        <i class="fas fa-sign-out-alt"></i> Login
       </a>
       <router-link to="/me" v-if="isLoggedIn">
-        Me
-        <i class="far fa-user-circle"></i>
+        <i class="far fa-user-circle"></i> Me
       </router-link>
-      <a
-        href="javascript:void(0)"
-        style="cursor: pointer;"
-        v-if="isLoggedIn"
-        @click="logout"
-      >
-        Logout
-        <i class="fas fa-sign-out-alt"></i>
+      <a href="javascript:void(0)" style="cursor: pointer;" v-if="isLoggedIn" @click="logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
       </a>
     </div>
   </nav>
@@ -90,12 +78,12 @@ export default {
   computed: {
     isLoggedIn: function() {
       return this.$store.getters.isLoggedIn;
-    },
+    }
   },
   data() {
     return {
       supportServer: config.discord.support,
-      inviteLink: config.discord.invite,
+      inviteLink: config.discord.invite
     };
   },
   methods: {
@@ -107,8 +95,8 @@ export default {
     updateNav() {
       $(".left").toggle("fast");
       $(".right").toggle("fast");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -279,7 +267,8 @@ export default {
     background: rgb(110, 54, 133);
   }
 
-  .dropdown-content a {
+  .dropdown-content a,
+  .dropdown-content router-link {
     display: block;
   }
 

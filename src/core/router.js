@@ -8,6 +8,7 @@ import Callback from "@/components/pages/Callback";
 import Login from "@/components/pages/Login";
 import Servers from "@/components/pages/Servers";
 import Guild from "@/components/pages/Guild";
+import Credits from "@/components/pages/Credits";
 
 Vue.use(Router);
 
@@ -53,6 +54,11 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      name: "credits",
+      path: "/credits",
+      component: Credits,
     },
     {
       name: "notfound",

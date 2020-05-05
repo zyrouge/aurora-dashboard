@@ -1,11 +1,22 @@
 <template>
   <div class="footer-container">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <div class="footer">
       <div class="footer-content">
         <div class="botinfo">
           <h1>Aurora</h1>
-          <h3>Take your server to a<br />Whole-New Level!</h3>
-          <p>Made by <strong>ZYROUGE</strong></p>
+          <h3>
+            Take your server to a
+            <br />Whole-New Level!
+          </h3>
+          <p>
+            <i class="fas fa-code"></i>
+            Made by
+            <strong>ZYROUGE</strong>
+          </p>
         </div>
         <div class="links">
           <p class="links">Links</p>
@@ -35,9 +46,9 @@ export default {
   data() {
     return {
       support: config.discord.support,
-      invite: config.discord.invite,
+      invite: config.discord.invite
     };
-  },
+  }
 };
 </script>
 

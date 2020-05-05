@@ -3,23 +3,34 @@
     <div id="parallax">
       <h1>Aurora</h1>
       <h3>Take your server to a Whole-New Level!</h3>
-      <a href="/invite"><i class="fas fa-plus"></i> Add to your Server!</a>
+      <a :href="inviteLink">
+        <i class="fas fa-plus"></i> Add to your Server!
+      </a>
     </div>
     <div class="mobile">
       <img src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png" />
       <h1>Aurora</h1>
       <h3>Take your server to a Whole-New Level!</h3>
       <br />
-      <a href="/invite"><i class="fas fa-plus"></i> Add to your Server!</a>
+      <a :href="inviteLink">
+        <i class="fas fa-plus"></i> Add to your Server!
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import config from "../../config";
+
 export default {
   name: "Hero",
   metaInfo: {
-    title: "Home",
+    title: "Home"
+  },
+  data() {
+    return {
+      inviteLink: config.discord.invite
+    };
   },
   components: {},
   mounted() {
@@ -43,8 +54,8 @@ export default {
         let x = `${_depth3}, ${_depth2}, ${_depth1}`;
         elem.style.backgroundPosition = x;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

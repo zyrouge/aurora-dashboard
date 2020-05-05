@@ -7,11 +7,7 @@
       <span>•</span>
     </div>
     <div class="guild" v-if="status == 'loaded'">
-      <img
-        class="guildIcon"
-        v-bind:src="guild.iconURL"
-        v-bind:alt="guild.name"
-      />
+      <img class="guildIcon" v-bind:src="guild.iconURL" v-bind:alt="guild.name" />
       <br />
       <h1>{{ guild.name }}</h1>
       <hr />
@@ -39,9 +35,7 @@
           </div>
         </div>
         <div class="topic" @click="takeOver('economy')">
-          <img
-            src="https://img.icons8.com/plasticine/100/000000/sales-performance.png"
-          />
+          <img src="https://img.icons8.com/plasticine/100/000000/sales-performance.png" />
           <div class="info">
             <p class="head">Economy</p>
             <p>Configure Economy related stuffs.</p>
@@ -56,7 +50,7 @@
 export default {
   name: "Guild",
   metaInfo: {
-    title: "Dashboard",
+    title: "Dashboard"
   },
   data() {
     return {
@@ -64,16 +58,16 @@ export default {
       error: "",
       defaultImage:
         "https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512",
-      status: "Loading...",
+      status: "Loading..."
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me/guilds`)
-      .then((res) => {
+      .then(res => {
         const guild = res.data.find(
-          (guild) =>
+          guild =>
             guild.id === that.$route.params.id &&
             (guild.permissions & 2146958591) === 2146958591
         );
@@ -82,7 +76,7 @@ export default {
         else guild.iconURL = `${that.defaultImage}`;
         that.updateGuild(guild);
       })
-      .catch((e) => {
+      .catch(e => {
         that.error = e;
       });
   },
@@ -93,8 +87,8 @@ export default {
     },
     takeOver(url) {
       this.$router.push(`${this.$route.path}/${url}`);
-    },
-  },
+    }
+  }
 };
 </script>
 
