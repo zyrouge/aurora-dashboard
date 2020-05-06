@@ -125,11 +125,7 @@ export default {
   created() {
     var that = this;
     this.$http
-      .get(`${config.api.base}/client/commands`, {
-        headers: {
-          password: `${config.api.password}`
-        }
-      })
+      .get(`${config.api.base}/commands`)
       .then(res => {
         const commands = new Array();
         res.data.forEach(data => {
