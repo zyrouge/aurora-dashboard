@@ -11,7 +11,7 @@ const cdn = "https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/";
 const password = process.env.VUE_APP_PASSWORD;
 const base =
   staging == "production"
-    ? `http://${process.env.VUE_APP_APIBASE}`
+    ? `https://${process.env.VUE_APP_APIBASE}`
     : "http://localhost:8080";
 
 /* Discord */
