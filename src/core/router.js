@@ -9,6 +9,7 @@ import Login from "@/components/pages/Login";
 import Servers from "@/components/pages/Servers";
 import Guild from "@/components/pages/Guild";
 import Credits from "@/components/pages/Credits";
+import Commands from "@/components/pages/Commands";
 
 Vue.use(Router);
 
@@ -59,6 +60,11 @@ const router = new Router({
       name: "credits",
       path: "/credits",
       component: Credits,
+    },
+    {
+      name: "commands",
+      path: "/commands",
+      component: Commands,
     },
     {
       name: "notfound",

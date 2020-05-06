@@ -7,6 +7,13 @@ const baseURL =
     : "http://localhost:8080";
 const cdn = "https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/";
 
+/* API */
+const password = process.env.VUE_APP_PASSWORD;
+const base =
+  staging == "production"
+    ? `http://${process.env.VUE_APP_APIBASE}`
+    : "http://localhost:8080";
+
 /* Discord */
 const id = "702808552892530829";
 const secret = process.env.VUE_APP_SECRET;
@@ -34,5 +41,9 @@ module.exports = {
     oauth,
     support,
     invite,
+  },
+  api: {
+    password,
+    base,
   },
 };
