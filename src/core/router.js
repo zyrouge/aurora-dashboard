@@ -10,6 +10,7 @@ import Servers from "@/components/pages/Servers";
 import Guild from "@/components/pages/Guild";
 import Credits from "@/components/pages/Credits";
 import Commands from "@/components/pages/Commands";
+import Status from "@/components/pages/Status";
 
 Vue.use(Router);
 
@@ -65,6 +66,11 @@ const router = new Router({
       name: "commands",
       path: "/commands",
       component: Commands,
+    },
+    {
+      name: "status",
+      path: "/status",
+      component: Status,
     },
     {
       name: "notfound",

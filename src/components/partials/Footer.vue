@@ -29,6 +29,7 @@
           <a :href="support" target="_blank">Discord</a>
           <router-link to="/contributors">Contributors</router-link>
           <router-link to="/credits">Credits</router-link>
+          <router-link to="/status">Status</router-link>
         </div>
         <div class="lastcolumn">
           <a :href="invite" target="_blank">Add to Discord</a>

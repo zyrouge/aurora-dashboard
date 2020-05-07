@@ -28,9 +28,9 @@
             <a v-bind:href="supportServer" target="_blank">
               <i class="fab fa-discord"></i> Discord
             </a>
-            <a href="https://status.auroradiscordbot.ga/" target="_blank">
+            <router-link to="/status">
               <i class="fas fa-layer-group"></i> Status
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
