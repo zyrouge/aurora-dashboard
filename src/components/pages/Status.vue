@@ -199,8 +199,8 @@ export default {
             }
           ]
         };
+        this.dashboardLoaded = true;
       });
-      this.dashboardLoaded = true;
     },
     getBot() {
       this.botLoaded = false;
