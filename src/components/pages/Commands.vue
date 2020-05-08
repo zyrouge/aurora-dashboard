@@ -50,7 +50,7 @@
           </div>
           <div v-show="command.show" class="moreinfo">
             <hr />
-            <p class="aliases">
+            <p v-if="command.conf.aliases.length > 0" class="aliases">
               <span>Aliases:</span>
               <code>{{ command.conf.aliases.join(", ") }}</code>
             </p>
