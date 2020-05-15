@@ -25,20 +25,20 @@ const $ = JQuery;
 export default {
   name: "me",
   metaInfo: {
-    title: "Profile",
+    title: "Profile"
   },
   data() {
     return {
       user: {},
       error: "",
-      status: "Loading...",
+      status: "Loading..."
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me`)
-      .then((res) => {
+      .then(res => {
         let avatar = `https://cdn.discordapp.com/embed/avatars/${Math.floor(
           Math.random() * 4
         )}.png`;
@@ -46,20 +46,26 @@ export default {
           avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.gif?size=1280`;
           $.get(avatar)
             .done(() => {})
-            .fail(
-              () =>
-                (avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.png?size=1280`)
-            );
+            .fail(() => {
+              avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.png?size=1280`;
+              $.get(avatar)
+                .done(() => {})
+                .fail(
+                  () =>
+                    (avatar = `https://cdn.discordapp.com/embed/avatars/${res
+                      .data.discriminator % 4}.png`)
+                );
+            });
         }
         res.data.avatarURL = avatar;
         that.status = "loaded";
         that.user = res.data;
       })
-      .catch((e) => {
+      .catch(e => {
         that.error = e;
       });
   },
-  methods: {},
+  methods: {}
 };
 </script>
 

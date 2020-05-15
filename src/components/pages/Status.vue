@@ -89,6 +89,25 @@
             </span>
           </div>
         </div>
+        <br />
+        <div class="messages">
+          <h2>Incidents</h2>
+          <div class="incidents">
+            <div class="loading" v-if="!incidents.length">
+              <span>•</span>
+              <span>•</span>
+              <span>•</span>
+            </div>
+            <div class="incident" v-for="incident in incidents" :key="incident.content">
+              <div class="author">
+                <img :src="incident.avatarURL" :alt="incident.author.username" />
+                <p class="username">{{ incident.author.username }}</p>
+                <p class="time">{{ incident.timestamp }}</p>
+              </div>
+              <p class="text">{{ incident.content }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -116,6 +135,7 @@ export default {
       stats: null,
       status: "",
       error: "",
+      incidents: [],
       dashboardData: null,
       botData: null,
       dashboardState: "down",
@@ -135,6 +155,7 @@ export default {
     this.getStatus();
     this.getDashboard();
     this.getBot();
+    this.getIncidents();
   },
   methods: {
     getStatus() {
@@ -244,6 +265,15 @@ export default {
         if (num == 2) this.botState = "up";
         if (num == 8) this.botState = "disrupted";
       }
+    },
+    getIncidents() {
+      axios.get(`${config.api.base}/statuschannel`).then(res => {
+        res.data.forEach(msg => {
+          msg.timestamp = moment(msg.unparsedTimestamp).format("DD/MM HH:mm");
+          msg.avatarURL = `https://cdn.discordapp.com/avatars/${msg.author.id}/${msg.author.avatar}.png?size=512`;
+        });
+        this.incidents = res.data;
+      });
     }
   }
 };
@@ -333,6 +363,45 @@ export default {
 .stat .stat-head span.state.down::after {
   content: "Down";
   color: #ff0000;
+}
+
+.incident {
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.incident img {
+  height: 30px;
+  border-radius: 50%;
+}
+
+.incident .author {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.incident .author .username {
+  font-size: 18px;
+  padding-left: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.incident .author .time {
+  font-size: 12px;
+  padding-left: 10px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.incident .text {
+  padding-top: 10px;
+  text-align: left;
 }
 
 p.error {
