@@ -287,16 +287,24 @@ export default {
     border-radius: 5px;
     padding: 5px 10px;
     overflow: hidden;
-    display: block;
-    opacity: 0;
-    transition: 0.25s;
+    display: none;
     z-index: 1;
-    transform: translateY(-4px);
   }
 
   .dropdown:hover .dropdown-content {
-    opacity: 1;
-    transform: translateY(0px);
+    display: block;
+    animation: PopUp 0.25s ease-in-out;
+  }
+
+  @keyframes PopUp {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
   }
 
   .dropdown-box.help {
