@@ -196,6 +196,12 @@ export default {
     margin: 0;
     border-radius: 50%;
     margin-top: 6px;
+    transition: 0.5s;
+  }
+
+  img:hover,
+  img:focus {
+    border-radius: 13px;
   }
 
   .left,
@@ -225,7 +231,11 @@ export default {
   .left router-link:hover,
   .left a:hover,
   .right router-link:hover,
-  .right a:hover {
+  .right a:hover,
+  .left router-link:focus,
+  .left a:focus,
+  .right router-link:focus,
+  .right a:focus {
     color: rgb(255, 255, 255);
   }
 
@@ -253,7 +263,8 @@ export default {
     padding: 5px 10px;
   }
 
-  .dropdown button:hover {
+  .dropdown button:hover,
+  .dropdown button:focus {
     color: white;
   }
 
@@ -292,11 +303,13 @@ export default {
     transform: translateX(330px);
   }
 
+  .dropdown-box:hover .dropdown-content,
   .dropdown-box:hover .dropdown-content {
     display: block;
   }
 
-  .dropdown-content:hover {
+  .dropdown-content:hover,
+  .dropdown-content:focus {
     display: block;
   }
 }

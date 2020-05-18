@@ -31,19 +31,19 @@ export default {
       {
         name: "description",
         content: "Take your server to a Whole-New Level!",
-        vmid: "test",
+        vmid: "test"
       },
       {
         property: "og:title",
         content: "Aurora Discord Bot",
-        template: (chunk) => `${chunk} - Aurora`,
-        vmid: "og:title",
-      },
-    ],
+        template: chunk => `${chunk} - Aurora`,
+        vmid: "og:title"
+      }
+    ]
   },
   components: {
     NavBar,
-    Footer,
+    Footer
   },
   created() {
     this.$http.interceptors.response.use(undefined, function(err) {
@@ -54,7 +54,7 @@ export default {
         throw err;
       });
     });
-  },
+  }
 };
 </script>
 
@@ -70,6 +70,10 @@ export default {
   --fuschia: #a239ca;
   --jewel: #4717f6;
   --stark: #e7dfdd;
+}
+
+:focus {
+  outline: none;
 }
 
 * {

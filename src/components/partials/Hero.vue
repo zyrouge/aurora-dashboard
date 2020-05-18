@@ -123,7 +123,8 @@ body {
   transition: 0.5s;
 }
 
-#parallax a:hover {
+#parallax a:hover,
+#parallax a:focus {
   background: var(--jewel);
   border: 2px solid var(--jewel);
   box-shadow: 0 0 15px var(--jewel);

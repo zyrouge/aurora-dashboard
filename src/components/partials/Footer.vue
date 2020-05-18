@@ -117,8 +117,11 @@ router-link {
 }
 
 a:hover,
-router-link:hover {
+router-link:hover,
+a:focus,
+router-link:focus {
   color: rgb(255, 255, 255);
+  position: relative;
 }
 
 .lastcolumn {
@@ -140,7 +143,8 @@ router-link:hover {
   border-radius: 10px;
 }
 
-.lastcolumn a:hover {
+.lastcolumn a:hover,
+.lastcolumn a:focus {
   transform: translateY(-5%);
   box-shadow: 0 0 5px var(--jewel);
 }
