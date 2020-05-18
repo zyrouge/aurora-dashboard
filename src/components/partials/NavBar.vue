@@ -287,12 +287,16 @@ export default {
     border-radius: 5px;
     padding: 5px 10px;
     overflow: hidden;
-    display: none;
+    display: block;
+    opacity: 0;
+    transition: 0.25s;
     z-index: 1;
+    transform: translateY(-4px);
   }
 
   .dropdown:hover .dropdown-content {
-    display: block;
+    opacity: 1;
+    transform: translateY(0px);
   }
 
   .dropdown-box.help {
@@ -303,13 +307,11 @@ export default {
     transform: translateX(330px);
   }
 
-  .dropdown-box:hover .dropdown-content,
   .dropdown-box:hover .dropdown-content {
     display: block;
   }
 
-  .dropdown-content:hover,
-  .dropdown-content:focus {
+  .dropdown-content:hover {
     display: block;
   }
 }
