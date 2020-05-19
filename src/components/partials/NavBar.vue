@@ -4,65 +4,82 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
-    <div class="mobnav">
-      <router-link class="logo" to="/" style="padding: 0 10px;">
-        <img src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png" height="40px" />
-      </router-link>
-      <span class="burger">
-        <i class="fa fa-bars" @click="updateNav"></i>
-      </span>
-    </div>
-    <div class="left" id="left">
-      <router-link to="/features">
-        <i class="far fa-check-circle"></i> Features
-      </router-link>
-      <router-link to="/commands">
-        <i class="fas fa-list"></i> Commands
-      </router-link>
-      <div class="dropdown">
-        <button class="dropbtn">
-          <i class="fa fa-caret-down"></i> Help
-        </button>
-        <div class="dropdown-box help">
-          <div class="dropdown-content">
-            <a v-bind:href="supportServer" target="_blank">
-              <i class="fab fa-discord"></i> Discord
+    <div class="navbar">
+      <div class="logo">
+        <router-link to="/">
+          <img src="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.png" alt="Logo" />
+        </router-link>
+      </div>
+      <div class="navbar-box">
+        <ul class="navbar-links__left">
+          <li>
+            <router-link to="/features">
+              <i class="far fa-check-circle"></i> Features
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/commands">
+              <i class="fas fa-list"></i> Commands
+            </router-link>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)">
+              <i class="fa fa-caret-down"></i> Help
             </a>
-            <router-link to="/status">
-              <i class="fas fa-layer-group"></i> Status
+            <ul>
+              <li>
+                <a v-bind:href="supportServer" target="_blank">
+                  <i class="fab fa-discord"></i> Discord
+                </a>
+              </li>
+              <li>
+                <router-link to="/status">
+                  <i class="fas fa-layer-group"></i> Status
+                </router-link>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)">
+              <i class="fa fa-caret-down"></i> Tools
+            </a>
+            <ul>
+              <li>
+                <router-link to="/credits">
+                  <i class="fas fa-angle-double-right"></i> Credits
+                </router-link>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-links__right">
+          <li>
+            <a v-bind:href="inviteLink" target="_blank">
+              <i class="fas fa-plus"></i> Invite
+            </a>
+          </li>
+          <li>
+            <router-link to="/servers">
+              <i class="far fa-clipboard"></i> Servers
             </router-link>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">
-          <i class="fa fa-caret-down"></i> Tools
-        </button>
-        <div class="dropdown-box tools">
-          <div class="dropdown-content">
-            <router-link to="/credits">
-              <i class="fas fa-angle-double-right"></i> Credits
+          </li>
+          <li>
+            <a href="/login" v-if="!isLoggedIn">
+              <i class="fas fa-sign-out-alt"></i> Login
+            </a>
+          </li>
+          <li v-if="isLoggedIn">
+            <router-link to="/me">
+              <i class="far fa-user-circle"></i> Me
             </router-link>
-          </div>
-        </div>
+          </li>
+          <li v-if="isLoggedIn">
+            <a href="javascript:void(0)" style="cursor: pointer;" @click="logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div class="right" id="right">
-      <a v-bind:href="inviteLink" target="_blank">
-        <i class="fas fa-plus"></i> Invite
-      </a>
-      <router-link to="/servers">
-        <i class="far fa-clipboard"></i> Servers
-      </router-link>
-      <a href="/login" v-if="!isLoggedIn">
-        <i class="fas fa-sign-out-alt"></i> Login
-      </a>
-      <router-link to="/me" v-if="isLoggedIn">
-        <i class="far fa-user-circle"></i> Me
-      </router-link>
-      <a href="javascript:void(0)" style="cursor: pointer;" v-if="isLoggedIn" @click="logout">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </a>
     </div>
   </nav>
 </template>
@@ -104,223 +121,141 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 750px) {
-  .mobnav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background: linear-gradient(
-      to left,
-      rgba(162, 57, 202, 0.2),
-      rgba(71, 23, 246, 0.2)
-    );
-  }
-
-  .mobnav .burger {
-    margin-left: auto;
-  }
-
-  img {
-    border-radius: 5px;
-  }
-
-  span.burger {
-    cursor: pointer;
-    padding-right: 15px;
-  }
-
-  .left router-link,
-  .left a,
-  .right router-link,
-  .right a {
-    display: block;
-    background: linear-gradient(
-      to left,
-      rgba(162, 57, 202, 0.2),
-      rgba(71, 23, 246, 0.2)
-    );
-    text-align: center;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: 0.5s;
-    padding: 5px;
-  }
-
-  .left router-link:hover,
-  .left a:hover,
-  .right router-link:hover,
-  .right a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .left a.router-link-active,
-  .left a.router-link-exact-active,
-  .right a.router-link-active,
-  .right a.router-link-exact-active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-
-  .left,
-  .right {
-    display: none;
-  }
-
-  .dropdown button {
-    display: none;
-  }
+nav {
+  background: linear-gradient(
+    to left,
+    rgba(115, 79, 129, 0.2),
+    rgba(71, 23, 246, 0.2)
+  );
+  height: 8vh;
+  padding: 0 10px;
 }
 
-@media screen and (min-width: 750px) {
-  nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background: linear-gradient(
-      to left,
-      rgba(115, 79, 129, 0.2),
-      rgba(71, 23, 246, 0.2)
-    );
-    overflow: hidden;
-  }
+.navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
 
-  .burger {
-    display: none;
-  }
+.logo img {
+  margin-top: 5px;
+  height: 40px;
+  border-radius: 50%;
+  transition: 0.25s;
+}
 
-  img {
-    margin: 0;
-    border-radius: 50%;
-    margin-top: 6px;
-    transition: 0.5s;
-  }
+.logo img:hover,
+.logo img:focus {
+  border-radius: 15px;
+}
 
-  img:hover,
-  img:focus {
-    border-radius: 13px;
-  }
+.navbar-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
 
-  .left,
-  .right {
-    display: block;
-  }
+.navbar-box ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0 5px;
+}
 
-  .left {
-    float: left;
-  }
+.navbar-box ul:nth-child(2) {
+  justify-content: flex-end;
+}
 
-  .right {
-    margin-left: auto;
-    float: right;
-  }
+.navbar-box li {
+  font-size: 15px;
+  margin: 0 7px;
+  list-style: none;
+  width: max-content;
+}
 
-  .left router-link,
-  .left a,
-  .right router-link,
-  .right a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: 0.5s;
-    padding: 5px 10px;
-  }
+.navbar-box li a,
+.navbar-box li router-link {
+  position: relative;
+  color: var(--stark);
+  text-decoration: none;
+  transition: 0.25s;
+}
 
-  .left router-link:hover,
-  .left a:hover,
-  .right router-link:hover,
-  .right a:hover,
-  .left router-link:focus,
-  .left a:focus,
-  .right router-link:focus,
-  .right a:focus {
-    color: rgb(255, 255, 255);
-  }
+.navbar-box li a:hover,
+.navbar-box li router-link:hover,
+.navbar-box li a:focus,
+.navbar-box li router-link:focus {
+  color: white;
+}
 
-  .left a.router-link-active,
-  .left a.router-link-exact-active,
-  .right a.router-link-active,
-  .right a.router-link-exact-active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 5px;
-  }
+.navbar-box li a::after,
+.navbar-box li router-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1.5px;
+  width: 100%;
+  background-color: var(--stark);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease-in;
+}
 
-  .dropdown {
-    display: inline;
-  }
+.navbar-box li a:hover::after,
+.navbar-box li a:focus::after,
+.navbar-box li router-link:hover::after,
+.navbar-box li router-link:focus::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
-  .dropdown button {
-    background: transparent;
-    border: transparent;
-    font-family: "Poppins";
-    color: rgba(255, 255, 255, 0.8);
-    transition: 0.5s;
-    font-size: 16px;
-    outline: none;
-    padding: 5px 10px;
-  }
+.dropdown {
+  cursor: pointer;
+  position: relative;
+}
 
-  .dropdown button:hover,
-  .dropdown button:focus {
-    color: white;
-  }
+.dropdown ul {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  visibility: hidden;
+  width: max-content;
+  opacity: 0;
+  transform: translateY(0px);
+  transition: 0.25s;
+  padding: 5px 10px;
+  background: var(--jewel);
+  border-radius: 4px;
+}
 
-  .dropdown-box {
-    position: absolute;
-    background: transparent;
-    padding-top: 10px;
-  }
+.dropdown ul li {
+  padding: 3px;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
 
-  .dropdown-content {
-    background: rgb(110, 54, 133);
-  }
+.dropdown:hover ul {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(5px);
+}
 
-  .dropdown-content a,
-  .dropdown-content router-link {
-    display: block;
+@keyframes PopUp {
+  from {
+    opacity: 0;
   }
-
-  .dropdown .dropdown-content {
-    border-radius: 5px;
-    padding: 5px 10px;
-    overflow: hidden;
-    display: none;
-    z-index: 1;
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-    animation: PopUp 0.25s ease-in-out;
-  }
-
-  @keyframes PopUp {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-
-  .dropdown-box.help {
-    transform: translateX(255px);
-  }
-
-  .dropdown-box.tools {
-    transform: translateX(330px);
-  }
-
-  .dropdown-box:hover .dropdown-content {
-    display: block;
-  }
-
-  .dropdown-content:hover {
-    display: block;
+  to {
+    opacity: 1;
   }
 }
 </style>
