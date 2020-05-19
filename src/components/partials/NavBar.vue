@@ -114,7 +114,7 @@ export default {
       if (!newHeight || !oldHeight || newHeight == oldHeight) return;
       if (newHeight > 750) {
         $(".navbar-box:not(.logo)").css({
-          transform: `translateY(0px)`,
+          transform: `translateY(0%)`,
           opacity: 1
         });
         // $(".burger div:nth-child(1)").css({
@@ -122,7 +122,7 @@ export default {
         // });
       } else {
         $(".navbar-box:not(.logo)").css({
-          transform: `translateY(-10px)`,
+          transform: `translateY(-120%)`,
           opacity: 0
         });
       }
@@ -143,7 +143,7 @@ export default {
     burger() {
       if ($(".navbar-box:not(.logo)").css("opacity") == 0) {
         $(".navbar-box:not(.logo)").css({
-          transform: `translateY(0px)`,
+          transform: `translateY(0%)`,
           opacity: 1
         });
         $(".burger div:nth-child(1)").css({
@@ -159,7 +159,7 @@ export default {
         });
       } else {
         $(".navbar-box:not(.logo)").css({
-          transform: `translateY(-10px)`,
+          transform: `translateY(-120%)`,
           opacity: 0
         });
 
@@ -356,7 +356,6 @@ nav {
       rgba(71, 23, 246, 0.4)
     );
     background-color: black;
-    /*background: rgba(115, 79, 129);*/
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -370,7 +369,7 @@ nav {
     height: fit-content;
     padding: 10px;
     border-radius: 5px;
-    transform: translateY(-10px);
+    transform: translateY(-120%);
     transition: 0.5s ease-in-out;
     opacity: 0;
   }
