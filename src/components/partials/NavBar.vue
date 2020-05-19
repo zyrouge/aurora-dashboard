@@ -63,8 +63,8 @@
               <i class="far fa-clipboard"></i> Servers
             </router-link>
           </li>
-          <li>
-            <a href="/login" v-if="!isLoggedIn">
+          <li v-if="!isLoggedIn">
+            <a href="/login">
               <i class="fas fa-sign-out-alt"></i> Login
             </a>
           </li>
@@ -117,6 +117,9 @@ export default {
           transform: `translateY(0px)`,
           opacity: 1
         });
+        // $(".burger div:nth-child(1)").css({
+        //   transform: `rotate(45deg)`
+        // });
       } else {
         $(".navbar-box:not(.logo)").css({
           transform: `translateY(-10px)`,
@@ -138,16 +141,38 @@ export default {
       });
     },
     burger() {
-      console.log($(".navbar-box:not(.logo)").css("transform"));
       if ($(".navbar-box:not(.logo)").css("opacity") == 0) {
         $(".navbar-box:not(.logo)").css({
           transform: `translateY(0px)`,
           opacity: 1
         });
+        $(".burger div:nth-child(1)").css({
+          transform: "rotate(-45deg) translate(-4px, 6px)"
+        });
+
+        $(".burger div:nth-child(2)").css({
+          opacity: "0"
+        });
+
+        $(".burger div:nth-child(3)").css({
+          transform: "rotate(45deg) translate(-4px, -6px)"
+        });
       } else {
         $(".navbar-box:not(.logo)").css({
           transform: `translateY(-10px)`,
           opacity: 0
+        });
+
+        $(".burger div:nth-child(1)").css({
+          transform: "none"
+        });
+
+        $(".burger div:nth-child(2)").css({
+          opacity: "1"
+        });
+
+        $(".burger div:nth-child(3)").css({
+          transform: "none"
         });
       }
     },
@@ -233,12 +258,14 @@ nav {
 .navbar-box li a:hover,
 .navbar-box li router-link:hover,
 .navbar-box li a:focus,
-.navbar-box li router-link:focus {
+.navbar-box li router-link:focus,
+.navbar-box li .router-link-active {
   color: white;
 }
 
 .navbar-box li a::after,
-.navbar-box li router-link::after {
+.navbar-box li router-link::after,
+.navbar-box li .router-link-active::after {
   content: "";
   position: absolute;
   left: 0;
@@ -254,7 +281,8 @@ nav {
 .navbar-box li a:hover::after,
 .navbar-box li a:focus::after,
 .navbar-box li router-link:hover::after,
-.navbar-box li router-link:focus::after {
+.navbar-box li router-link:focus::after,
+.navbar-box li .router-link-active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
@@ -303,6 +331,7 @@ nav {
   margin: 4px;
   background-color: var(--stark);
   border-radius: 2px;
+  transition: 0.25s ease-in-out;
 }
 
 @media screen and (max-width: 750px) {
