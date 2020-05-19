@@ -24,7 +24,7 @@
           </li>
           <li class="dropdown">
             <a href="javascript:void(0)">
-              <i class="fa fa-caret-down"></i> Help
+              <i class="fa fa-caret-down"></i> Support
             </a>
             <ul>
               <li>
@@ -41,9 +41,14 @@
           </li>
           <li class="dropdown">
             <a href="javascript:void(0)">
-              <i class="fa fa-caret-down"></i> Tools
+              <i class="fa fa-caret-down"></i> Others
             </a>
             <ul>
+              <li>
+                <router-link to="/contributors">
+                  <i class="fas fa-heart"></i> Contributors
+                </router-link>
+              </li>
               <li>
                 <router-link to="/credits">
                   <i class="fas fa-angle-double-right"></i> Credits
@@ -117,9 +122,6 @@ export default {
           transform: `translateY(0%)`,
           opacity: 1
         });
-        // $(".burger div:nth-child(1)").css({
-        //   transform: `rotate(45deg)`
-        // });
       } else {
         $(".navbar-box:not(.logo)").css({
           transform: `translateY(-120%)`,
