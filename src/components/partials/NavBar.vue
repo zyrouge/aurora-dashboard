@@ -80,6 +80,11 @@
           </li>
         </ul>
       </div>
+      <div class="burger" @click="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   </nav>
 </template>
@@ -100,8 +105,31 @@ export default {
   data() {
     return {
       supportServer: config.discord.support,
-      inviteLink: config.discord.invite
+      inviteLink: config.discord.invite,
+      width: null
     };
+  },
+  watch: {
+    width(newHeight, oldHeight) {
+      if (!newHeight || !oldHeight || newHeight == oldHeight) return;
+      if (newHeight > 750) {
+        $(".navbar-box:not(.logo)").css({
+          transform: `translateY(0px)`,
+          opacity: 1
+        });
+      } else {
+        $(".navbar-box:not(.logo)").css({
+          transform: `translateY(-10px)`,
+          opacity: 0
+        });
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener("resize", this.onResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
   methods: {
     logout: function() {
@@ -109,9 +137,22 @@ export default {
         this.$router.push("/");
       });
     },
-    updateNav() {
-      $(".left").toggle("fast");
-      $(".right").toggle("fast");
+    burger() {
+      console.log($(".navbar-box:not(.logo)").css("transform"));
+      if ($(".navbar-box:not(.logo)").css("opacity") == 0) {
+        $(".navbar-box:not(.logo)").css({
+          transform: `translateY(0px)`,
+          opacity: 1
+        });
+      } else {
+        $(".navbar-box:not(.logo)").css({
+          transform: `translateY(-10px)`,
+          opacity: 0
+        });
+      }
+    },
+    onResize(event) {
+      this.width = event.currentTarget.innerWidth;
     }
   }
 };
@@ -250,12 +291,85 @@ nav {
   transform: translateY(5px);
 }
 
-@keyframes PopUp {
-  from {
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger div {
+  box-sizing: border-box;
+  width: 20px;
+  height: 3px;
+  margin: 4px;
+  background-color: var(--stark);
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 750px) {
+  .burger {
+    display: block;
+  }
+
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  .navbar-box:not(.logo),
+  .navbar-box:not(.burger) {
+    visibility: visible;
+    z-index: 1;
+    background: linear-gradient(
+      to left,
+      rgba(115, 79, 129, 0.4),
+      rgba(71, 23, 246, 0.4)
+    );
+    background-color: black;
+    /*background: rgba(115, 79, 129);*/
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    top: calc(8vh + 2%);
+    left: 0;
+    right: 0;
+    margin: 0 2%;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    transform: translateY(-10px);
+    transition: 0.5s ease-in-out;
     opacity: 0;
   }
-  to {
-    opacity: 1;
+
+  .navbar-box ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navbar-box ul li {
+    padding: 2px;
+  }
+
+  .navbar-box ul .dropdown > a {
+    display: none;
+  }
+
+  .dropdown ul {
+    visibility: inherit;
+    opacity: inherit;
+    position: relative;
+    background: transparent;
+    padding: 0;
+  }
+
+  .dropdown:hover ul {
+    transform: none;
   }
 }
 </style>
+
