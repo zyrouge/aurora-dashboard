@@ -23,7 +23,7 @@
 export default {
   name: "Servers",
   metaInfo: {
-    title: "Dashboard",
+    title: "Dashboard"
   },
   data() {
     return {
@@ -31,25 +31,27 @@ export default {
       error: "",
       defaultImage:
         "https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512",
-      status: "Loading...",
+      status: "Loading..."
     };
   },
   created() {
     var that = this;
     this.$http
       .get(`https://discordapp.com/api/users/@me/guilds`)
-      .then((res) => {
+      .then(res => {
         res.data
-          .filter((guild) => (guild.permissions & 2146958591) === 2146958591)
-          .forEach((guild) => {
-            if (guild.icon !== null)
-              guild.iconURL = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=1280`;
-            else guild.iconURL = `${that.defaultImage}`;
+          .filter(guild => (guild.permissions & 2146958591) === 2146958591)
+          .forEach(guild => {
+            guild.iconURL = guild.icon
+              ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${
+                  guild.icon.includes("a_") ? "gif" : "png"
+                }?size=1280`
+              : `https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512`;
             that.updateGuilds(guild);
           });
         that.loaded();
       })
-      .catch((e) => {
+      .catch(e => {
         that.error = e;
       });
   },
@@ -62,8 +64,8 @@ export default {
     },
     gotoGuild(id) {
       this.$router.push(`/servers/${id}`);
-    },
-  },
+    }
+  }
 };
 </script>
 

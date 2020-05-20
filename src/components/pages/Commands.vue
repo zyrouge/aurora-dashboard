@@ -74,6 +74,29 @@
               <span>User Permissions:</span>
               <code>{{ command.conf.permission.user.join(", ") }}</code>
             </p>
+            <hr v-if="command.commands.length" />
+            <div class="subcommands-box" v-if="command.commands.length">
+              <p class="sub-head">Sub-Commands</p>
+              <div
+                class="subcommands"
+                v-for="(subcommand, index) in command.commands"
+                :key="subcommand.name"
+              >
+                <div class="subcommand">
+                  <p class="name">{{ subcommand.name }}</p>
+                  <p class="description">{{ subcommand.description }}</p>
+                  <p class="aliases" v-if="subcommand.aliases.length">
+                    <span>Aliases:</span>
+                    <code>{{ subcommand.aliases.join(", ") }}</code>
+                  </p>
+                  <p class="usage">
+                    <span>Usage:</span>
+                    <code>a&{{ command.conf.name }} {{ subcommand.name }} {{ subcommand.usage }}</code>
+                  </p>
+                  <hr v-if="index + 1 !== command.commands.length" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div v-if="filteredCommands.length == 0" class="noResults">
@@ -117,6 +140,21 @@ export default {
           cmd.conf.aliases
             .join(" ")
             .toLowerCase()
+            .indexOf(this.searchBox.toLowerCase()) > -1 ||
+          cmd.commands
+            .map(sub => sub.name)
+            .join(" ")
+            .toLowerCase()
+            .indexOf(this.searchBox.toLowerCase()) > -1 ||
+          cmd.commands
+            .map(sub => sub.aliases.join(" "))
+            .join(" ")
+            .toLowerCase()
+            .indexOf(this.searchBox.toLowerCase()) > -1 ||
+          cmd.commands
+            .map(sub => sub.description)
+            .join(" ")
+            .toLowerCase()
             .indexOf(this.searchBox.toLowerCase()) > -1
         );
       });
@@ -130,14 +168,12 @@ export default {
         const commands = new Array();
         res.data.forEach(data => {
           data.show = false;
-          console.log(data.commands);
           commands.push(data);
         });
         that.commands = commands;
         that.status = "loaded";
       })
       .catch(e => {
-        console.log(e);
         that.error = e;
       });
   },
@@ -242,6 +278,26 @@ code {
 
 .noResults img {
   width: 25%;
+}
+
+.subcommands-box {
+  background-color: rgba(255, 255, 255, 0.07);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.subcommands-box .sub-head {
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+.subcommands .name {
+  font-weight: bold;
+}
+
+.subcommand .description {
+  font-size: 14px;
 }
 
 @media screen and (max-width: 750px) {

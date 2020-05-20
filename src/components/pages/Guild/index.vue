@@ -1,5 +1,26 @@
 <template>
   <div class="cointainer">
+    <div class="back">
+      <router-link class="link" to="/servers">
+        <i class="fas fa-arrow-left"></i> Back to Servers
+      </router-link>
+      <div class="guilds-box">
+        <p>
+          <span v-if="!guild || !guilds.length">Loading...</span>
+          <img :src="guild.iconURL" />
+          <span>{{ guild.name }}</span>
+          <i class="fas fa-caret-down"></i>
+        </p>
+        <ul class="guilds" v-if="guilds.length">
+          <li v-for="_guild in (guilds.filter(x => x.name !== guild.name))" :key="_guild.name">
+            <router-link :to="{ name: 'guild', params: { id: _guild.id }}">
+              <img :src="_guild.iconURL" />
+              {{ _guild.name }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
     <div class="loading" v-if="status != 'loaded'">
       <span>•</span>
@@ -41,6 +62,13 @@
             <p>Configure Economy related stuffs.</p>
           </div>
         </div>
+        <div class="topic" @click="takeOver('logging')">
+          <img src="https://img.icons8.com/color/96/000000/event-log.png" />
+          <div class="info">
+            <p class="head">Logging</p>
+            <p>Logs all the Activities in your Guild.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +83,7 @@ export default {
   data() {
     return {
       guild: {},
+      guilds: [],
       error: "",
       defaultImage:
         "https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512",
@@ -66,14 +95,26 @@ export default {
     this.$http
       .get(`https://discordapp.com/api/users/@me/guilds`)
       .then(res => {
+        res.data
+          .filter(g => (g.permissions & 2146958591) === 2146958591)
+          .forEach(g => {
+            g.iconURL = g.icon
+              ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.${
+                  g.icon.includes("a_") ? "gif" : "png"
+                }?size=1280`
+              : `https://cdn.discordapp.com/avatars/521007613475946496/55e9fd5ec6ac9224f38d4a4cba2b355b.png?size=512`;
+            that.guilds.push(g);
+          });
         const guild = res.data.find(
-          guild =>
-            guild.id === that.$route.params.id &&
-            (guild.permissions & 2146958591) === 2146958591
+          g =>
+            g.id === that.$route.params.id &&
+            (g.permissions & 2146958591) === 2146958591
         );
-        if (guild.icon !== null)
-          guild.iconURL = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=1280`;
-        else guild.iconURL = `${that.defaultImage}`;
+        guild.iconURL = guild.icon
+          ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${
+              guild.icon.includes("a_") ? "gif" : "png"
+            }?size=1280`
+          : `${that.defaultImage}`;
         that.updateGuild(guild);
       })
       .catch(e => {
@@ -164,6 +205,115 @@ hr {
   color: white;
   font-size: 20px;
   font-weight: 800;
+}
+
+.back {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back .guilds-box {
+  position: relative;
+  cursor: pointer;
+  min-width: 30%;
+}
+
+.back .guilds-box p {
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.back ul {
+  visibility: hidden;
+  position: absolute;
+  height: 0px;
+  overflow-y: scroll;
+  transition: 0.25s ease-out;
+  opacity: 0;
+  background-color: #7744b9;
+  padding: 5px;
+  left: 0;
+  right: 0;
+}
+
+.back a.link,
+.back router-link.link {
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+  opacity: 0.7;
+}
+
+.back a.link:hover,
+.back router-link.link:hover {
+  opacity: 1;
+  letter-spacing: 0.5px;
+}
+
+.back .guilds-box:hover ul,
+.back .guilds-box:active ul {
+  visibility: visible;
+  height: 200px;
+  opacity: 1;
+}
+
+.back .guilds-box i {
+  transition: 0.25s;
+}
+
+.back .guilds-box:hover i,
+.back .guilds-box:active i {
+  transform: rotate(180deg);
+}
+
+.back ul li {
+  text-align: center;
+  transition: 0.3s;
+  border-radius: 3px;
+  padding: 5px 0;
+}
+
+.back img {
+  border-radius: 50%;
+  height: 20px;
+  margin-right: 7px;
+}
+
+.back ul li:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+}
+
+.back ul li a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 750px) {
+  .back {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+
+  .back .guilds-box {
+    width: 90%;
+  }
+
+  .back .link {
+    padding-bottom: 10px;
+  }
 }
 
 @media screen and (max-width: 750px) {

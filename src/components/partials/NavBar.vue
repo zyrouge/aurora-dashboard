@@ -132,6 +132,11 @@ export default {
   },
   mounted() {
     window.addEventListener("resize", this.onResize);
+    $(".navbar-box li a, .navbar-box li router-link").click(() => {
+      if (this.width && this.width < 750) {
+        this.burger();
+      }
+    });
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);

@@ -19,9 +19,6 @@
 </template>
 
 <script>
-import JQuery from "jquery";
-const $ = JQuery;
-
 export default {
   name: "me",
   metaInfo: {
@@ -39,30 +36,17 @@ export default {
     this.$http
       .get(`https://discordapp.com/api/users/@me`)
       .then(res => {
-        let avatar = `https://cdn.discordapp.com/embed/avatars/${Math.floor(
-          Math.random() * 4
-        )}.png`;
-        if (res.data.avatar) {
-          avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.gif?size=1280`;
-          $.get(avatar)
-            .done(() => {})
-            .fail(() => {
-              avatar = `https://cdn.discordapp.com/avatars/${res.data.id}/${res.data.avatar}.png?size=1280`;
-              $.get(avatar)
-                .done(() => {})
-                .fail(
-                  () =>
-                    (avatar = `https://cdn.discordapp.com/embed/avatars/${res
-                      .data.discriminator % 4}.png`)
-                );
-            });
-        }
-        res.data.avatarURL = avatar;
+        res.data.avatarURL = res.data.avatar
+          ? `https://cdn.discordapp.com/avatars/${res.data.id}/${
+              res.data.avatar
+            }.${res.data.avatar.includes("a_") ? "gif" : "png"}?size=1280`
+          : `https://cdn.discordapp.com/embed/avatars/${res.data.discriminator %
+              4}.png`;
         that.status = "loaded";
         that.user = res.data;
       })
       .catch(e => {
-        that.error = e;
+        that.error = e.response;
       });
   },
   methods: {}

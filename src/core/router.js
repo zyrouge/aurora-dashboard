@@ -7,7 +7,7 @@ import Me from "@/components/pages/Me";
 import Callback from "@/components/pages/Callback";
 import Login from "@/components/pages/Login";
 import Servers from "@/components/pages/Servers";
-import Guild from "@/components/pages/Guild";
+import Guild from "@/components/pages/Guild/index";
 import Credits from "@/components/pages/Credits";
 import Commands from "@/components/pages/Commands";
 import Status from "@/components/pages/Status";
