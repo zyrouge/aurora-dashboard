@@ -1,11 +1,7 @@
 <template>
   <div class="cointainer">
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <div class="loading" v-if="status != 'loaded'">
-      <span>•</span>
-      <span>•</span>
-      <span>•</span>
-    </div>
+    <Loader v-if="status !== 'loaded'" />
     <div class="me" v-if="status == 'loaded'">
       <div class="avatar">
         <img v-bind:src="user.avatarURL" v-bind:alt="user.username" />
@@ -19,10 +15,15 @@
 </template>
 
 <script>
+import Loader from "../partials/Loader";
+
 export default {
   name: "me",
   metaInfo: {
     title: "Profile"
+  },
+  components: {
+    Loader
   },
   data() {
     return {

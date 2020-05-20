@@ -1,11 +1,7 @@
 <template>
   <h4 class="Callback">
     <div>
-      <div class="loading" v-if="status != 'loaded'">
-        <span>•</span>
-        <span>•</span>
-        <span>•</span>
-      </div>
+      <Loader />
       <h1>Logging in...</h1>
       <h5>This should not take more time!</h5>
     </div>
@@ -13,13 +9,18 @@
 </template>
 
 <script>
+import Loader from "../partials/Loader";
+
 export default {
   metaInfo: {
-    title: "Callback",
+    title: "Callback"
+  },
+  components: {
+    Loader
   },
   data() {
     return {
-      code: "",
+      code: ""
     };
   },
   methods: {
@@ -31,12 +32,12 @@ export default {
       this.$store
         .dispatch("login", { code })
         .then(() => this.$router.push(direct))
-        .catch((err) => console.log(err));
-    },
+        .catch(err => console.log(err));
+    }
   },
   mounted() {
     this.login();
-  },
+  }
 };
 </script>
 

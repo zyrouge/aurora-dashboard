@@ -5,11 +5,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
     />
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <div class="loading" v-if="status != 'loaded'">
-      <span>•</span>
-      <span>•</span>
-      <span>•</span>
-    </div>
+    <Loader v-if="status !== 'loaded'" />
     <div class="commands-box" v-if="status == 'loaded'">
       <h1>Commands</h1>
       <input
@@ -111,11 +107,15 @@
 
 <script>
 import config from "../../config";
+import Loader from "../partials/Loader";
 
 export default {
   name: "commands",
   metaInfo: {
     title: "Commands"
+  },
+  components: {
+    Loader
   },
   data() {
     return {

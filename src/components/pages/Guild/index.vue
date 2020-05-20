@@ -13,20 +13,16 @@
         </p>
         <ul class="guilds" v-if="guilds.length">
           <li v-for="_guild in (guilds.filter(x => x.name !== guild.name))" :key="_guild.name">
-            <router-link :to="{ name: 'guild', params: { id: _guild.id }}">
+            <a @click="changeServer(_guild.id)">
               <img :src="_guild.iconURL" />
               {{ _guild.name }}
-            </router-link>
+            </a>
           </li>
         </ul>
       </div>
     </div>
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <div class="loading" v-if="status != 'loaded'">
-      <span>•</span>
-      <span>•</span>
-      <span>•</span>
-    </div>
+    <Loader v-if="status != 'loaded'" />
     <div class="guild" v-if="status == 'loaded'">
       <img class="guildIcon" v-bind:src="guild.iconURL" v-bind:alt="guild.name" />
       <br />
@@ -75,10 +71,14 @@
 </template>
 
 <script>
+import Loader from "../../partials/Loader";
 export default {
   name: "Guild",
   metaInfo: {
     title: "Dashboard"
+  },
+  components: {
+    Loader
   },
   data() {
     return {
@@ -128,6 +128,9 @@ export default {
     },
     takeOver(url) {
       this.$router.push(`${this.$route.path}/${url}`);
+    },
+    changeServer(id) {
+      this.$router.push({ name: `guild`, params: { id } });
     }
   }
 };

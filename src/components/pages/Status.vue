@@ -1,11 +1,7 @@
 <template>
   <div class="status">
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <div class="loading" v-if="status != 'loaded'">
-      <span>•</span>
-      <span>•</span>
-      <span>•</span>
-    </div>
+    <Loader v-if="status !== 'loaded'" />
     <div v-if="stats" class="container">
       <h1>Status</h1>
       <div class="infobox">
@@ -42,11 +38,7 @@
               </p>
             </div>
             <div class="dashboard-chart">
-              <botchart
-                v-if="botLoaded"
-                :chartData="botData"
-                :styles="chartStyles"
-              ></botchart>
+              <botchart v-if="botLoaded" :chartData="botData" :styles="chartStyles"></botchart>
             </div>
           </div>
           <div class="compound-box">
@@ -86,8 +78,8 @@
               <p>
                 <b>Status:</b>
                 {{
-                  shard.status.charAt(0).toUpperCase() +
-                    shard.status.substring(1).toLowerCase()
+                shard.status.charAt(0).toUpperCase() +
+                shard.status.substring(1).toLowerCase()
                 }}
               </p>
             </span>
@@ -98,20 +90,13 @@
           <h2>Incidents</h2>
           <div class="incidents">
             <div class="loading" v-if="!incidents.length">
-              <span>•</span>
-              <span>•</span>
-              <span>•</span>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
-            <div
-              class="incident"
-              v-for="incident in incidents"
-              :key="incident.content"
-            >
+            <div class="incident" v-for="incident in incidents" :key="incident.content">
               <div class="author">
-                <img
-                  :src="incident.avatarURL"
-                  :alt="incident.author.username"
-                />
+                <img :src="incident.avatarURL" :alt="incident.author.username" />
                 <p class="username">{{ incident.author.username }}</p>
                 <p class="time">{{ incident.timestamp }}</p>
               </div>
@@ -128,7 +113,9 @@
 import config from "../../config";
 import dashboardchart from "../partials/DashboardChart.vue";
 import botchart from "../partials/BotChart.vue";
+import Loader from "../partials/Loader";
 import axios from "axios";
+
 const marked = require("marked");
 const moment = require("moment");
 require("moment-duration-format");
@@ -138,9 +125,10 @@ export default {
   components: {
     dashboardchart,
     botchart,
+    Loader
   },
   metaInfo: {
-    title: "Status",
+    title: "Status"
   },
   data() {
     return {
@@ -158,8 +146,8 @@ export default {
       chartStyles: {
         height: "200px",
         width: "100%",
-        position: "relative",
-      },
+        position: "relative"
+      }
     };
   },
   watch: {},
@@ -174,12 +162,12 @@ export default {
       var that = this;
       this.$http
         .get(`${config.api.base}/status`)
-        .then((res) => {
+        .then(res => {
           let resp = res.data;
           that.stats = resp;
           that.status = "loaded";
         })
-        .catch((e) => {
+        .catch(e => {
           console.log(e);
           that.error = e;
         });
@@ -204,7 +192,7 @@ export default {
     },
     getDashboard() {
       this.dashboardLoaded = false;
-      axios.post(`${config.api.base}/dashboardchart`).then(async (res) => {
+      axios.post(`${config.api.base}/dashboardchart`).then(async res => {
         const monitor = res.data.monitors[0];
         this.setState("dashboard", monitor.status);
         var data = [];
@@ -228,16 +216,16 @@ export default {
               data,
               backgroundColor: "rgba(162, 57, 202, 0.2)",
               borderColor: "rgba(162, 57, 202, 1)",
-              borderWidth: 1,
-            },
-          ],
+              borderWidth: 1
+            }
+          ]
         };
         this.dashboardLoaded = true;
       });
     },
     getBot() {
       this.botLoaded = false;
-      axios.post(`${config.api.base}/botchart`).then(async (res) => {
+      axios.post(`${config.api.base}/botchart`).then(async res => {
         const monitor = res.data.monitors[0];
         this.setState("bot", monitor.status);
         var data = [];
@@ -261,9 +249,9 @@ export default {
               data,
               backgroundColor: "rgba(162, 57, 202, 0.2)",
               borderColor: "rgba(162, 57, 202, 1)",
-              borderWidth: 1,
-            },
-          ],
+              borderWidth: 1
+            }
+          ]
         };
         this.botLoaded = true;
       });
@@ -279,16 +267,16 @@ export default {
       }
     },
     getIncidents() {
-      axios.get(`${config.api.base}/statuschannel`).then((res) => {
-        res.data.forEach((msg) => {
+      axios.get(`${config.api.base}/statuschannel`).then(res => {
+        res.data.forEach(msg => {
           msg.message = marked(`${msg.content}`);
           msg.timestamp = moment(msg.unparsedTimestamp).format("DD/MM HH:mm");
           msg.avatarURL = `https://cdn.discordapp.com/avatars/${msg.author.id}/${msg.author.avatar}.png?size=512`;
         });
         this.incidents = res.data;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

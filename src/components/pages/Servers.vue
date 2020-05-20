@@ -1,11 +1,7 @@
 <template>
   <div class="cointainer">
     <p class="error" v-if="error && error.length > 0">{{ error }}</p>
-    <div class="loading" v-if="status != 'loaded'">
-      <span>•</span>
-      <span>•</span>
-      <span>•</span>
-    </div>
+    <Loader v-if="status !== 'loaded'" />
     <div class="guilds">
       <ul>
         <li v-for="(guild, index) in guilds" :key="index">
@@ -20,10 +16,15 @@
 </template>
 
 <script>
+import Loader from "../partials/Loader";
+
 export default {
   name: "Servers",
   metaInfo: {
     title: "Dashboard"
+  },
+  components: {
+    Loader
   },
   data() {
     return {

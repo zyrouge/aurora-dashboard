@@ -7,7 +7,7 @@
       <center>
         <div class="container">
           <transition name="fade" mode="out-in">
-            <router-view></router-view>
+            <router-view :key="$route.fullPath"></router-view>
           </transition>
         </div>
       </center>
@@ -85,7 +85,7 @@ export default {
 body {
   background-color: var(--void);
   color: var(--stark);
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
 }
 
 main {
@@ -128,107 +128,6 @@ main {
   }
   100% {
     opacity: 1;
-  }
-}
-
-.loading {
-  display: block;
-}
-
-.loading span {
-  font-size: 50px;
-  color: var(--fuschia);
-  animation: Loader 2s infinite;
-}
-
-.loading span.status {
-  color: white;
-  font-size: 30px;
-  animation: none;
-}
-
-.loading span:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.loading span:nth-child(2) {
-  animation-delay: 0.66s;
-}
-
-.loading span:nth-child(3) {
-  animation-delay: 1.32s;
-}
-
-@keyframes Loader {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
-  }
-}
-
-/* Save Prompt */
-#save {
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  width: calc(100vw - 40px);
-  background: rgb(56, 45, 88);
-  padding: 5px 15px;
-  border-radius: 5px;
-  text-align: left;
-  animation: savePromptAnime 0.5s;
-}
-
-#save p.text {
-  padding-top: 3px;
-}
-
-#save .btns {
-  margin-left: auto;
-}
-
-#save button {
-  margin-left: 5px;
-  cursor: pointer;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 5px;
-  border: none;
-  transition: 0.5s;
-}
-
-#save button.submitBtn {
-  background-color: rgb(0, 192, 0);
-}
-
-#save button.discardBtn {
-  background-color: rgb(192, 0, 0);
-}
-
-#save button.submitBtn:hover {
-  background-color: rgb(0, 255, 0);
-}
-
-#save button.discardBtn:hover {
-  background-color: rgb(255, 0, 0);
-}
-
-@keyframes savePromptAnime {
-  0% {
-    transform: translateY(1000px);
-  }
-  80% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
   }
 }
 </style>
