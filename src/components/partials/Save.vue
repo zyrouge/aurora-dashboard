@@ -3,9 +3,7 @@
     <p class="text">Don't loose your changes!</p>
     <div class="btns">
       <button type="submit" class="submitBtn" @click="save__Child">Save</button>
-      <button type="reset" class="discardBtn" @click="discard__Child">
-        Discard
-      </button>
+      <button type="reset" class="discardBtn" @click="discard__Child">Discard</button>
     </div>
   </div>
 </template>
@@ -19,8 +17,8 @@ export default {
     },
     discard__Child() {
       this.$emit("discard", true);
-    },
-  },
+    }
+  }
 };
 </script>
 

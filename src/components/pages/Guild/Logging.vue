@@ -5,10 +5,7 @@
     <div class="box" v-if="status == 'loaded'">
       <div class="pagetopic">
         <div class="left">
-          <img
-            class="pageicon"
-            src="https://img.icons8.com/color/96/000000/event-log.png"
-          />
+          <img class="pageicon" src="https://img.icons8.com/color/96/000000/event-log.png" />
           <h2>Logging</h2>
         </div>
         <input type="checkbox" name="topic-toggle" class="topic-toggle" />
@@ -16,11 +13,7 @@
       <br />
       <div class="content">
         <transition name="save-popup">
-          <Save
-            v-if="showSave"
-            v-on:save="saveChanges"
-            v-on:discard="discardChanges"
-          />
+          <Save v-if="showSave" v-on:save="saveChanges" v-on:discard="discardChanges" />
         </transition>
         <div class="channel-box">
           <p class="channel-head">Channel</p>
@@ -39,7 +32,6 @@
               :searchable="false"
               :loading="false"
             ></multiselect>
-            {{ guildData.database.serverLogs }}
           </div>
         </div>
       </div>
@@ -59,12 +51,12 @@ import { diff } from "deep-diff";
 export default {
   name: "Logging",
   metaInfo: {
-    title: "Dashboard",
+    title: "Dashboard"
   },
   components: {
     Loader,
     Multiselect,
-    Save,
+    Save
   },
   data() {
     return {
@@ -72,17 +64,17 @@ export default {
       guildData: {
         main: {},
         database: {
-          serverLogs: null,
+          serverLogs: null
         },
         other: {
-          channelsValues: [],
-        },
+          channelsValues: []
+        }
       },
       guildDB: {},
       beforeGuildData: {},
       error: "",
       status: "Loading...",
-      showSave: false,
+      showSave: false
     };
   },
   mounted() {
@@ -93,9 +85,9 @@ export default {
       var that = this;
       this.$http
         .get(`https://discordapp.com/api/users/@me/guilds`)
-        .then((res) => {
+        .then(res => {
           const guild = res.data.find(
-            (g) =>
+            g =>
               g.id === that.$route.params.id &&
               (g.permissions & 2146958591) === 2146958591
           );
@@ -107,7 +99,7 @@ export default {
           that.guild = guild;
           that.getDatabase();
         })
-        .catch((e) => {
+        .catch(e => {
           that.error = e;
         });
     },
@@ -116,13 +108,12 @@ export default {
       this.$http
         .get(`${config.api.base}/guilds/${that.$route.params.id}/info`, {
           headers: {
-            password: config.api.password,
-          },
+            password: config.api.password
+          }
         })
-        .then((res) => {
+        .then(res => {
           /* Main */
           that.guildData.main = { ...res.data };
-          that.beforeGuildData = { ...res.data };
 
           /* Channels */
           that.guildData.other.channelsValues = Object.values(
@@ -132,19 +123,21 @@ export default {
           /* Server Logs */
           if (that.guildDB.serverLogs) {
             const channel = that.guildData.other.channelsValues.find(
-              (x) => x.id == that.guildDB.serverLogs
+              x => x.id == that.guildDB.serverLogs
             );
             if (channel) {
               that.guildData.database.serverLogs = channel;
             }
           }
-          console.log(that.guildData.database.serverLogs);
+
+          /* Cache */
+          that.beforeGuildData = { ...that.guildData };
 
           /* Loaded */
           that.status = "loaded";
           return true;
         })
-        .catch((e) => {
+        .catch(e => {
           that.error = e;
         });
     },
@@ -153,15 +146,15 @@ export default {
       this.$http
         .get(`${config.api.base}/guilds/${that.$route.params.id}/data`, {
           headers: {
-            password: config.api.password,
-          },
+            password: config.api.password
+          }
         })
-        .then((res) => {
+        .then(res => {
           that.guildDB = { ...res.data };
           that.beforeGuildDB = { ...res.data };
           that.getGuildData();
         })
-        .catch((e) => {
+        .catch(e => {
           that.error = e;
         });
     },
@@ -171,26 +164,25 @@ export default {
         .patch(
           `${config.api.base}/guilds/${that.$route.params.id}/data`,
           {
-            serverLogs: that.guildDB.serverLogs,
+            serverLogs: that.guildDB.serverLogs
           },
           {
             headers: {
-              password: config.api.password,
-            },
+              password: config.api.password
+            }
           }
         )
         .then(() => {
           that.getDatabase();
         })
-        .catch((e) => {
-          console.error(e);
+        .catch(e => {
           that.error = e;
         });
     },
     discardChanges() {
-      this.guildDB = Object.assign({}, this.beforeGuildDB);
-      this.getGuildData();
-    },
+      // this.guildData = Object.assign({}, this.beforeGuildData);
+      this.getGuild();
+    }
   },
   watch: {
     guildDB: {
@@ -199,13 +191,13 @@ export default {
         if (diffs) this.showSave = true;
         else this.showSave = false;
       },
-      deep: true,
+      deep: true
     },
     "guildData.database.serverLogs": function(newValue) {
       const newID = newValue ? newValue.id : null;
       this.guildDB.serverLogs = newID;
-    },
-  },
+    }
+  }
 };
 </script>
 
