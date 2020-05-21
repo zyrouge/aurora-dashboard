@@ -38,9 +38,9 @@ export default {
 };
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<!-- <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
-<!-- Dropdown
+ Dropdown
   <div>
       <label class="typo__label">Role Selection</label>
       <multiselect
@@ -69,7 +69,7 @@ export default {
     </div>
 -->
 
-<style>
+<style scoped>
 /* Multiselect CSS */
 .multiselect__tags {
   border: 2px solid var(--fuschia);

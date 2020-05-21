@@ -1,5 +1,5 @@
 <template>
-  <div class="cointainer">
+  <div class="container">
     <div class="back">
       <router-link class="link" to="/servers">
         <i class="fas fa-arrow-left"></i> Back to Servers
@@ -29,49 +29,14 @@
       <h1>{{ guild.name }}</h1>
       <hr />
       <br />
-      <div class="topics">
-        <div class="topic" @click="takeOver('welcome')">
-          <img src="https://img.icons8.com/color/96/000000/confetti.png" />
-          <div class="info">
-            <p class="head">Farewell</p>
-            <p>Modify you Welcomer and Leaver.</p>
-          </div>
-        </div>
-        <div class="topic" @click="takeOver('moderation')">
-          <img src="https://img.icons8.com/color/96/000000/thor-hammer.png" />
-          <div class="info">
-            <p class="head">Moderation</p>
-            <p>Configure Moderation Actions.</p>
-          </div>
-        </div>
-        <div class="topic" @click="takeOver('leveling')">
-          <img src="https://img.icons8.com/bubbles/100/000000/medal.png" />
-          <div class="info">
-            <p class="head">Leveling</p>
-            <p>Configure Leveling System.</p>
-          </div>
-        </div>
-        <div class="topic" @click="takeOver('economy')">
-          <img src="https://img.icons8.com/plasticine/100/000000/sales-performance.png" />
-          <div class="info">
-            <p class="head">Economy</p>
-            <p>Configure Economy related stuffs.</p>
-          </div>
-        </div>
-        <div class="topic" @click="takeOver('logging')">
-          <img src="https://img.icons8.com/color/96/000000/event-log.png" />
-          <div class="info">
-            <p class="head">Logging</p>
-            <p>Logs all the Activities in your Guild.</p>
-          </div>
-        </div>
-      </div>
     </div>
+    <router-view v-if="status == 'loaded'"></router-view>
   </div>
 </template>
 
 <script>
 import Loader from "../../partials/Loader";
+
 export default {
   name: "Guild",
   metaInfo: {
@@ -110,6 +75,7 @@ export default {
             g.id === that.$route.params.id &&
             (g.permissions & 2146958591) === 2146958591
         );
+        if (!guild) return that.exitPage();
         guild.iconURL = guild.icon
           ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.${
               guild.icon.includes("a_") ? "gif" : "png"
@@ -131,12 +97,20 @@ export default {
     },
     changeServer(id) {
       this.$router.push({ name: `guild`, params: { id } });
+    },
+    exitPage() {
+      this.$router.push({ name: `servers` });
     }
   }
 };
 </script>
 
 <style scoped>
+.container {
+  margin: 0;
+  padding: 0;
+}
+
 .container .guild img.guildIcon {
   width: 20%;
   border: 3px solid var(--stark);

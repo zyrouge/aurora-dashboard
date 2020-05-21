@@ -2,8 +2,10 @@
   <div id="save">
     <p class="text">Don't loose your changes!</p>
     <div class="btns">
-      <button type="submit" class="submitBtn" @click="save">Save</button>
-      <button type="reset" class="discardBtn" @click="discard">Discard</button>
+      <button type="submit" class="submitBtn" @click="save__Child">Save</button>
+      <button type="reset" class="discardBtn" @click="discard__Child">
+        Discard
+      </button>
     </div>
   </div>
 </template>
@@ -11,10 +13,14 @@
 <script>
 export default {
   name: "Save",
-  props: {
-    save: { type: Function },
-    discard: { type: Function }
-  }
+  methods: {
+    save__Child() {
+      this.$emit("save", true);
+    },
+    discard__Child() {
+      this.$emit("discard", true);
+    },
+  },
 };
 </script>
 
@@ -34,6 +40,7 @@ export default {
   text-align: left;
   transition: 0.25s;
   animation: savePromptAnime 0.5s;
+  z-index: 999;
 }
 
 #save p.text {

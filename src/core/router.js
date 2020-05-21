@@ -11,6 +11,8 @@ import Guild from "@/components/pages/Guild/index";
 import Credits from "@/components/pages/Credits";
 import Commands from "@/components/pages/Commands";
 import Status from "@/components/pages/Status";
+import GuildHome from "@/components/pages/Guild/Home";
+import Logging from "@/components/pages/Guild/Logging";
 
 Vue.use(Router);
 
@@ -56,6 +58,16 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       },
+      children: [
+        {
+          path: "",
+          component: GuildHome,
+        },
+        {
+          path: "logging",
+          component: Logging,
+        },
+      ],
     },
     {
       name: "credits",
