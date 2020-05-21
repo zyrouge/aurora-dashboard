@@ -2,8 +2,8 @@
   <div id="save">
     <p class="text">Don't loose your changes!</p>
     <div class="btns">
-      <button type="submit" class="submitBtn" @click="save__Child">Save</button>
-      <button type="reset" class="discardBtn" @click="discard__Child">Discard</button>
+      <button type="submit" class="submitBtn" @click="save__Child"></button>
+      <button type="reset" class="discardBtn" @click="discard__Child"></button>
     </div>
   </div>
 </template>
@@ -53,7 +53,8 @@ export default {
   margin-left: 5px;
   cursor: pointer;
   color: white;
-  padding: 8px 20px;
+  height: 35px;
+  width: 100px;
   border-radius: 5px;
   border: none;
   transition: 0.5s;
@@ -94,7 +95,15 @@ export default {
 
 @media screen and (min-width: 700px) {
   #save button {
-    padding: 8px 55px;
+    width: 130px;
   }
+}
+
+.submitBtn::before {
+  content: "Save";
+}
+
+.discardBtn::before {
+  content: "Discord";
 }
 </style>
