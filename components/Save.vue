@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD:components/Save.vue
   <div id="__save__">
     <p class="__text__">
       Don't loose your changes!
@@ -6,6 +7,13 @@
     <div class="__btns__">
       <button type="submit" class="__submitBtn__" @click="save__Child" />
       <button type="reset" class="__discardBtn__" @click="discard__Child" />
+=======
+  <div id="save">
+    <p class="text">Don't loose your changes!</p>
+    <div class="btns">
+      <button type="submit" class="submitBtn" @click="save__Child">Save</button>
+      <button type="reset" class="discardBtn" @click="discard__Child">Discard</button>
+>>>>>>> parent of bd9970e... Fixed Logging:src/components/partials/Save.vue
     </div>
   </div>
 </template>
@@ -54,8 +62,7 @@ export default {
   margin-left: 5px;
   cursor: pointer;
   color: white;
-  height: 35px;
-  width: 100px;
+  padding: 8px 20px;
   border-radius: 5px;
   border: none;
   transition: 0.5s;
@@ -95,6 +102,7 @@ export default {
 }
 
 @media screen and (min-width: 700px) {
+<<<<<<< HEAD:components/Save.vue
   #__save__ button {
     width: 130px;
   }
@@ -107,4 +115,10 @@ export default {
 .__discardBtn__::before {
   content: "Discard";
 }
+=======
+  #save button {
+    padding: 8px 55px;
+  }
+}
+>>>>>>> parent of bd9970e... Fixed Logging:src/components/partials/Save.vue
 </style>
