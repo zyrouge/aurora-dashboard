@@ -67,7 +67,7 @@ module.exports = {
     extend (config, ctx) {
     }
   },
-  generate: {
-    fallback: true
+  server: {
+    port: process.env.PORT || 8000
   }
 }
