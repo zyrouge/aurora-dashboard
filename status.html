@@ -36,29 +36,31 @@
     </div>
 
     <!-- Container -->
-    <div class="container">
-        <div class="topic">
-            <h1>Status</h1>
-        </div>
-        <div class="chart">
-            <div class="title">
-                <h3>Bot</h3>
-                <span class="bot__title"></span>
+    <main>
+        <div class="container">
+            <div class="topic">
+                <h1>Status</h1>
             </div>
-            <canvas id="bot__chart"></canvas>
-        </div>
-        <div class="chart">
-            <div class="title">
-                <h3>Website</h3>
-                <span class="dashboard__title"></span>
+            <div class="chart">
+                <div class="title">
+                    <h3>Bot</h3>
+                    <span class="bot__title"></span>
+                </div>
+                <canvas id="bot__chart"></canvas>
             </div>
-            <canvas id="dashboard__chart"></canvas>
+            <div class="chart">
+                <div class="title">
+                    <h3>Website</h3>
+                    <span class="dashboard__title"></span>
+                </div>
+                <canvas id="dashboard__chart"></canvas>
+            </div>
+            <div class="incidents-box">
+                <h2>Incidents</h2>
+                <div class="incidents" />
+            </div>
         </div>
-        <div class="incidents-box">
-            <h2>Incidents</h2>
-            <div class="incidents" />
-        </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -81,6 +83,9 @@ body {
     background-color: #0f1014;
 }
 
+main {
+    margin-top: 60px;
+}
 
 .topic {
     background: linear-gradient(45deg, #a239ca, #4717f6);
@@ -187,7 +192,7 @@ body {
 hr {
     width: 100%;
     background-color: white;
-    padding: 1px;
+    padding: 0.5px;
     opacity: 0.1;
     margin: 15px 0;
 }
