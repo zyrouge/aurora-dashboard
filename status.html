@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status — Aurora Bot</title><link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-duration-format@2.3.2/lib/moment-duration-format.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.0/marked.min.js"></script>
+    <script src="app.js"></script>
+    <script src="status.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="nav"></div>
+
+    <!-- Loader -->
+    <link rel="stylesheet" href="/loader.css">
+    <div id="__LOADER__">
+        <div class="__LOADER__CONTENT">
+            <div class="__LOADER__CONTENT__BAR">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p class="__LOADER__CONTENT__LOADING">
+                Loading...
+            </p>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <div class="topic">
+            <h1>Status</h1>
+        </div>
+        <div class="chart">
+            <div class="title">
+                <h3>Bot</h3>
+                <span class="bot__title"></span>
+            </div>
+            <canvas id="bot__chart"></canvas>
+        </div>
+        <div class="chart">
+            <div class="title">
+                <h3>Website</h3>
+                <span class="dashboard__title"></span>
+            </div>
+            <canvas id="dashboard__chart"></canvas>
+        </div>
+        <div class="incidents-box">
+            <h2>Incidents</h2>
+            <div class="incidents" />
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div id="footer" />
+    </footer>
+</body>
+
+<style scoped>
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #f1f1f2;
+    font-family: Montserrat, sans-serif;
+    background-color: #0f1014;
+}
+
+
+.topic {
+    background: linear-gradient(45deg, #a239ca, #4717f6);
+    padding: 5vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chart {
+    padding: 10px 10px 40px 10px;
+    background-color: rgba(162, 57, 202, 0.05);
+    height: 350px;
+    margin: 5%;
+}
+
+.title {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.__up__::after {
+    content: "Online";
+    font-weight: bold;
+    color: rgb(0, 255, 0);
+}
+
+.__disrupted__::after {
+    content: "Disrupted";
+    font-weight: bold;
+    color: rgb(255, 255, 0);
+}
+
+.__down__::after {
+    content: "Down";
+    font-weight: bold;
+    color: rgb(255, 0, 0);
+}
+
+.incidents-box {
+    text-align: center;
+    margin: 5%;
+}
+
+.incidents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.incidents .incident {
+    margin: 10px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(162, 57, 202, 0.05);
+}
+
+.incidents .incident .author {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.incidents .incident .author .__author__ {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.incidents .incident .author .__author__ .username {
+    font-weight: bold;
+}
+
+.incidents .incident .author .time {
+    opacity: 0.5;
+}
+
+.incidents .incident img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+hr {
+    width: 100%;
+    background-color: white;
+    padding: 1px;
+    opacity: 0.1;
+    margin: 15px 0;
+}
+</style>
+
+</html>

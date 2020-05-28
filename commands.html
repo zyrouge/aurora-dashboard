@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands — Aurora Bot</title><link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/zyrouge/aurora-cdn/logo.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+    <script src="commands.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div id="nav"></div>
+
+    <!-- Loader -->
+    <link rel="stylesheet" href="/loader.css">
+    <div id="__LOADER__">
+        <div class="__LOADER__CONTENT">
+            <div class="__LOADER__CONTENT__BAR">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p class="__LOADER__CONTENT__LOADING">
+                Loading...
+                <a href="/">Go to Home</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <div class="topic">
+            <h1>Commands</h1>
+        </div>
+        <div class="commands" />
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div id="footer" />
+    </footer>
+</body>
+
+<style scoped>
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #f1f1f2;
+    font-family: Montserrat, sans-serif;
+    background-color: #0f1014;
+}
+
+.topic {
+    background: linear-gradient(45deg, #a239ca, #4717f6);
+    padding: 5vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.commands {
+    padding: 3% 5%;
+}
+
+.command-box .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.command-box .title .cat {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.command-box {
+    margin-top: 5px;
+    background-color: rgba(162, 57, 202);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.command-box p {
+    padding: 2px 0;
+}
+
+.command-box hr {
+    margin: 3px 0;
+    opacity: 0.5;
+}
+
+.subcommand {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-top: 5px;
+}
+
+code {
+    background-color: #281375;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+</style>
+
+</html>
