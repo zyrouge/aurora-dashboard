@@ -136,8 +136,8 @@ const incidents = () => {
                 </p>
             </div>
             <hr>
-            <p class="text">${marked(incident.content)}</p>`;
-            incidentsHtml.push(`<div class="incident">${incidentHtml.join("")}</div>`);
+            <div class="text">${marked(incident.content)}</div>`;
+            incidentsHtml.push(`<div class="incident">${incidentHtml}</div>`);
         });
         $(`${incidentsHtml.join("<br>")}`).appendTo(".incidents");
     })
